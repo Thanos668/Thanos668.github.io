@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="实验," />
 
 
 
@@ -79,13 +79,26 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="博客">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="CVE-2019-13288 下载安装目标1.1创建12cd $HOMEmkdir fuzzing_xpdf &amp;&amp; cd fuzzing_xpdf&#x2F;  首先为要进行模糊测试的项目创建一个新的文件夹，这应该是一个基本的习惯，但之前我创建新项目的时候没有过多留意过，基本上都是用IDE自动创建的，时间久了再想重新找到的话不太容易，这个点以后会多加注意。 1.2下载Xpdf并解压12wge">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Exercise1">
+<meta property="og:url" content="http://example.com/2023/07/08/Exercise-1/index.html">
 <meta property="og:site_name" content="博客">
+<meta property="og:description" content="CVE-2019-13288 下载安装目标1.1创建12cd $HOMEmkdir fuzzing_xpdf &amp;&amp; cd fuzzing_xpdf&#x2F;  首先为要进行模糊测试的项目创建一个新的文件夹，这应该是一个基本的习惯，但之前我创建新项目的时候没有过多留意过，基本上都是用IDE自动创建的，时间久了再想重新找到的话不太容易，这个点以后会多加注意。 1.2下载Xpdf并解压12wge">
 <meta property="og:locale">
+<meta property="og:image" content="http://example.com/2023/07/08/Exercise-1/afl-fuzz.jpg">
+<meta property="og:image" content="http://example.com/2023/07/08/Exercise-1/image-20230708223725732.png">
+<meta property="og:image" content="http://example.com/2023/07/08/Exercise-1/image-20230708224346613.png">
+<meta property="og:image" content="http://example.com/2023/07/08/Exercise-1/image-20230708225431130.png">
+<meta property="og:image" content="http://example.com/2023/07/08/Exercise-1/image-20230708235712194.png">
+<meta property="og:image" content="http://example.com/2023/07/08/Exercise-1/image-20230708225514616.png">
+<meta property="og:image" content="http://example.com/2023/07/08/Exercise-1/image-20230708234710230.png">
+<meta property="article:published_time" content="2023-07-08T07:25:59.000Z">
+<meta property="article:modified_time" content="2023-07-08T16:26:28.274Z">
 <meta property="article:author" content="赵禹">
+<meta property="article:tag" content="实验">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/07/08/Exercise-1/afl-fuzz.jpg">
 
 
 
@@ -115,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/"/>
+  <link rel="canonical" href="http://example.com/2023/07/08/Exercise-1/"/>
 
 
 
 
 
-  <title>博客</title>
+  <title>Exercise1 | 博客</title>
   
 
 
@@ -140,8 +153,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,9 +226,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -246,9 +258,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/07/08/Exercise-1/" itemprop="url">Exercise1</a></h1>
+          <h1 class="post-title" itemprop="name headline">Exercise1</h1>
         
 
         <div class="post-meta">
@@ -298,9 +308,7 @@
       
 
       
-        
-          
-            <p>CVE-2019-13288</p>
+        <p>CVE-2019-13288</p>
 <h1 id="下载安装目标"><a href="#下载安装目标" class="headerlink" title="下载安装目标"></a>下载安装目标</h1><h2 id="1-1创建"><a href="#1-1创建" class="headerlink" title="1.1创建"></a>1.1创建</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME</span><br><span class="line">mkdir fuzzing_xpdf &amp;&amp; cd fuzzing_xpdf/</span><br></pre></td></tr></table></figure>
 
 <p>首先为要进行模糊测试的项目创建一个新的文件夹，这应该是一个基本的习惯，但之前我创建新项目的时候没有过多留意过，基本上都是用IDE自动创建的，时间久了再想重新找到的话不太容易，这个点以后会多加注意。</p>
@@ -375,8 +383,6 @@
 <p>2.我初步了解使用AFL++进行模糊测试的流程，以本实验为例，首先使用AFL对目标程序进行插桩编译，知道得到能触发异常的文件，进行保存，后使用GDB等debug工具，对目标程序进行编译，后找到引发问题的原因，进而进行下一步的修复工作。</p>
 <p>3.借由此次实验，我还补习了一些其他Linux的指令操作，同时也引出了一些新的问题，督促我进一步学习。</p>
 
-          
-        
       
     </div>
     
@@ -391,151 +397,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/07/%E8%AF%BB%E5%90%8E%E6%84%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/07/07/%E8%AF%BB%E5%90%8E%E6%84%9F/" itemprop="url">读后感</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-07T14:02:54+08:00">
-                2023-07-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/%E5%AE%9E%E9%AA%8C/" rel="tag"># 实验</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a target="_blank" rel="noopener" href="http://ifsec.blogspot.com/2018/02/so-you-want-to-work-in-security-and-for.html">So you want to work in security? (and for some reason ended up here rather than reading other people’s posts on the topic).</a></p>
-<p>本文中，作者面向想要从事安全相关工作的新人提出了一些自己的总结建议，以本文记录其主要内容以及读后感，方便日后回顾。</p>
-<h1 id="经验建议"><a href="#经验建议" class="headerlink" title="经验建议"></a>经验建议</h1><h2 id="1-1兴趣爱好"><a href="#1-1兴趣爱好" class="headerlink" title="1.1兴趣爱好"></a>1.1兴趣爱好</h2><p>首先作者强调<strong>兴趣爱好</strong>的重要性，以其身边的业内人士举例，都是先对安全行业先有了兴趣，然后发展为工作。有兴趣爱好，就会花更多的时间精力投入相关工作，从而取得更多的收获，更深入的研究成果。</p>
-<h2 id="1-2自己做事"><a href="#1-2自己做事" class="headerlink" title="1.2自己做事"></a>1.2自己做事</h2><p>作者强调自己做事，不要仅限于遵循预设的课程。（目前感觉不能准确懂得作者想要表达的意思）</p>
-<p>这里我的理解是，在学习中要触类旁通，举一反三。要主动探索，而不是被动接受。</p>
-<h2 id="1-3面对困难-不要放弃"><a href="#1-3面对困难-不要放弃" class="headerlink" title="1.3面对困难 不要放弃"></a>1.3面对困难 不要放弃</h2><p>万事开头难。作者指出在刚开始学习各种资源时，会遇到很多不懂的知识，应当把每一点信息都当作学习的线索。</p>
-<p>以我目前的情况来说，阅读文献时会遇到很多没有提到过的名词概念，将这些点作为新的分支再去进行学习，确实是一个能很好了解文献涉及的相关领域内容的抓手。</p>
-<h2 id="1-4不要害怕失败"><a href="#1-4不要害怕失败" class="headerlink" title="1.4不要害怕失败"></a>1.4不要害怕失败</h2><p>作者指出在工作中，大多数的尝试方法都不会奏效，这是正常现象，不要放弃，而是分析方法失败的原因，并在此基础上继续前进。</p>
-<p>这里我的理解是，科研学习的内容和之前的学习经历不同，因为以前的所有问题都是有解决方法的，例如所有的考试、实验，都是有可供参考的解决答案。但科研内容上，需要解决的都是目前没有答案的问题，所以失败是很正常的，要保持正常心态。</p>
-<h2 id="1-5你比你想象的要聪明"><a href="#1-5你比你想象的要聪明" class="headerlink" title="1.5你比你想象的要聪明"></a>1.5你比你想象的要聪明</h2><p>这里作者鼓励刚开始的新人要敢于尝试，不要轻易怀疑自己的能力。在进行软件审查时也不要轻易放弃字节的想法，不要被“你并不比开发人员聪明”的想法限制住。等到已经对这个行业有所了解后，再更改掉这个想法就好。</p>
-<h1 id="2-学习方法"><a href="#2-学习方法" class="headerlink" title="2.学习方法"></a>2.学习方法</h1><h2 id="2-1利用学习资源"><a href="#2-1利用学习资源" class="headerlink" title="2.1利用学习资源"></a>2.1利用学习资源</h2><p>作者指出当前的学习入门难度比10年前要高很多，但同样也有更多的学习资源可以利用，因此要学会利用资源。</p>
-<h3 id="2-1-1学会问问题"><a href="#2-1-1学会问问题" class="headerlink" title="2.1.1学会问问题"></a>2.1.1学会问问题</h3><p>这里作者举例，不要搜索如何攻击一个程序，这样基本不会得到想要的答案，而是要换个角度，尝试是否能搜索到目标程序的工作原理，源代码，抑或是搜索是否有已经成功攻击的人及其文章、演示等。</p>
-<p>总结来说，就是间接问问题而不是直接问问题本身。</p>
-<h3 id="2-1-2使用推特"><a href="#2-1-2使用推特" class="headerlink" title="2.1.2使用推特"></a>2.1.2使用推特</h3><p>作者指出许多安全社区都会在推特上分享新闻。这里重点在于要能够找到能了解最新资源的途径。</p>
-<hr>
-<h2 id="2-2练习CTF"><a href="#2-2练习CTF" class="headerlink" title="2.2练习CTF"></a>2.2练习CTF</h2><p>作者指出通过CTF是一个很好的学习方法，可以根据任务分数判读各种挑战的难度，从容易的开始，逐渐积累。在进行了一定程度的练习之后，要对现实的真实目标进行尝试。</p>
-<h1 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h1><p>读完这篇文章主要有以下两点收获，一是对将来会遇到的问题有了提前的预期，二是对今后的学习规划有了更清晰的方向。</p>
-<p>这是我的第一篇博客，确实感觉自己也不太会写东西，可能也是从小就对文学作品的接触比较少。但今后还是会坚持写的吧，确实是写的时候也是对所学所感的一次记录。希望能稳步向前。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/07/07/%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="next" title="读后感">
+                <i class="fa fa-chevron-left"></i> 读后感
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -545,10 +436,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -556,6 +448,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -576,8 +472,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -628,6 +533,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E7%9B%AE%E6%A0%87"><span class="nav-number">1.</span> <span class="nav-text">下载安装目标</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.</span> <span class="nav-text">1.1创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E4%B8%8B%E8%BD%BDXpdf%E5%B9%B6%E8%A7%A3%E5%8E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">1.2下载Xpdf并解压</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%92%8C%E7%9B%AE%E6%A0%87"><span class="nav-number">1.3.</span> <span class="nav-text">1.3安装依赖和目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4%E6%9E%84%E5%BB%BA%E8%AF%AD%E6%96%99%E5%BA%93%E5%B9%B6%E6%B5%8B%E8%AF%95Xpdf"><span class="nav-number">1.4.</span> <span class="nav-text">1.4构建语料库并测试Xpdf</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDAFL"><span class="nav-number">2.</span> <span class="nav-text">下载AFL++</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1%E5%AE%89%E8%A3%85%E9%9C%80%E8%A6%81%E4%BE%9D%E8%B5%96"><span class="nav-number">2.1.</span> <span class="nav-text">2.1安装需要依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2%E5%AE%89%E8%A3%85%E6%9E%84%E5%BB%BAAFL"><span class="nav-number">2.2.</span> <span class="nav-text">2.2安装构建AFL++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3%E4%BD%BF%E7%94%A8AFL"><span class="nav-number">2.3.</span> <span class="nav-text">2.3使用AFL++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E5%B4%A9%E6%BA%83"><span class="nav-number">3.</span> <span class="nav-text">检查崩溃</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1%E5%86%8D%E7%8E%B0%E5%B4%A9%E6%BA%83"><span class="nav-number">3.1.</span> <span class="nav-text">3.1再现崩溃</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2%E6%A3%80%E6%9F%A5"><span class="nav-number">3.2.</span> <span class="nav-text">3.2检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3%E4%BF%AE%E5%A4%8D"><span class="nav-number">3.3.</span> <span class="nav-text">3.3修复</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -768,6 +689,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
