@@ -229,6 +229,182 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/09/Exercise-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/07/09/Exercise-2/" itemprop="url">Exercise-2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-09T17:19:46+08:00">
+                2023-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3895"><strong>CVE-2009-3895</strong></a>：一种基于堆的缓冲区溢出，可能由无效的EXIF映像触发。</p>
+<p><a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2836"><strong>CVE-2012-2836</strong></a>：可通过带有特制EXIF标记的图像触发的越界读取漏洞。</p>
+<h1 id="下载与安装目标"><a href="#下载与安装目标" class="headerlink" title="下载与安装目标"></a>下载与安装目标</h1><p>基本流程与实验一中一样，但由于本次模糊测试的目标是库文件，所以除了<code>libexif</code>库本身，还要下载一个作为接口的程序。这里参考指导给出的方法，下载调用了<code>libexif</code>库的<code>exif command-line</code>，作为模糊测试的接口应用。</p>
+<p><strong>创建新文件夹</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME</span><br><span class="line">mkdir fuzzing_libexif &amp;&amp; cd fuzzing_libexif/</span><br></pre></td></tr></table></figure>
+
+<p><strong>下载并解压libexif：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/libexif/libexif/archive/refs/tags/libexif-0_6_14-release.tar.gz</span><br><span class="line">tar -xzvf libexif-0_6_14-release.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p><strong>构建并安装libexif：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd libexif-libexif-0_6_14-release/</span><br><span class="line">sudo apt-get install autopoint libtool gettext libpopt-dev</span><br><span class="line">autoreconf -fvi</span><br><span class="line">./configure --enable-shared=no --prefix=&quot;$HOME/fuzzing_libexif/install/&quot;</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<ul>
+<li><code>autopoint</code>：自动创建和更新Gettext翻译文件的工具。</li>
+<li><code>libtool</code>：用于管理共享库的工具，可帮助编译和链接过程中处理库的依赖关系。</li>
+<li><code>gettext</code>：国际化和本地化工具集，用于提取字符串和进行翻译。</li>
+<li><code>libpopt-dev</code>：开发库和头文件，用于解析命令行选项和参数。</li>
+<li><code>autoreconf -fvi</code> 用于自动重新生成和更新一个项目的构建系统。</li>
+</ul>
+<p><strong>安装构建exif：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME/fuzzing_libexif</span><br><span class="line">wget https://github.com/libexif/exif/archive/refs/tags/exif-0_6_15-release.tar.gz</span><br><span class="line">tar -xzvf exif-0_6_15-release.tar.gz</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd exif-exif-0_6_15-release/</span><br><span class="line">autoreconf -fvi</span><br><span class="line">./configure --enable-shared=no --prefix=&quot;$HOME/fuzzing_libexif/install/&quot; PKG_CONFIG_PATH=$HOME/fuzzing_libexif/install/lib/pkgconfig</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试功能：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HOME/fuzzing_libexif/install/bin/exif</span><br></pre></td></tr></table></figure>
+
+<h1 id="模糊测试"><a href="#模糊测试" class="headerlink" title="模糊测试"></a>模糊测试</h1><p><strong>构建语料库：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME/fuzzing_libexif</span><br><span class="line">wget https://github.com/ianare/exif-samples/archive/refs/heads/master.zip</span><br><span class="line">unzip master.zip</span><br></pre></td></tr></table></figure>
+
+<p><strong>用<code>afl-clang-lto</code>编译<code>libexif</code>和<code>exif</code>：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rm -r $HOME/fuzzing_libexif/install</span><br><span class="line">cd $HOME/fuzzing_libexif/libexif-libexif-0_6_14-release/</span><br><span class="line">make clean</span><br><span class="line">export LLVM_CONFIG=&quot;llvm-config-11&quot;</span><br><span class="line">CC=afl-clang-lto ./configure --enable-shared=no --prefix=&quot;$HOME/fuzzing_libexif/install/&quot;</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME/fuzzing_libexif/exif-exif-0_6_15-release</span><br><span class="line">make clean</span><br><span class="line">export LLVM_CONFIG=&quot;llvm-config-11&quot;</span><br><span class="line">CC=afl-clang-lto ./configure --enable-shared=no --prefix=&quot;$HOME/fuzzing_libexif/install/&quot; PKG_CONFIG_PATH=$HOME/fuzzing_libexif/install/lib/pkgconfig</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p><strong>模糊测试：</strong></p>
+<p>这里流程与实验一基本相同</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afl-fuzz -i $HOME/fuzzing_libexif/exif-samples-master/jpg/ -o $HOME/fuzzing_libexif/out/ -s 123 -- $HOME/fuzzing_libexif/install/bin/exif @@</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Exercise-2/image-20230709212801880.png" alt="image-20230709212801880"></p>
+<h1 id="检查漏洞"><a href="#检查漏洞" class="headerlink" title="检查漏洞"></a>检查漏洞</h1><p><strong>检查：</strong></p>
+<p>首先按照指导中给出的方式，用Eclipse进行debug</p>
+<p><img src="/Exercise-2/image-20230709221256240.png" alt="image-20230709221256240"></p>
+<p><img src="/Exercise-2/image-20230709221754860.png" alt="image-20230709221754860"></p>
+<p>然后用实验一中使用的GDB又进行了一次debug</p>
+<p><img src="/Exercise-2/image-20230709222705660.png" alt="image-20230709222705660"></p>
+<p><img src="/Exercise-2/image-20230709222750024.png" alt="image-20230709222750024"></p>
+<p>两种方法都能成功的再现崩溃，并提供崩溃相关信息。两种方法操作的步骤复杂度基本相同，<code>Eclipse</code>因为有可视化界面，可能相对更容易一点，但就显示信息结果而言，反而感觉是<code>GDB</code>给出的报错信息，更好解读。</p>
+<p><strong>漏洞修复：</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/libexif/libexif/commit/8ce72b7f81e61ef69b7ad5bdfeff1516c90fa361">CVE-2012-2836的修复</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/libexif/libexif/commit/00986f6fa979fe810b46e376a462c581f9746e06">CVE-2009-3895的修复</a></li>
+</ul>
+<p>这里直接给出官方的修复方法。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>1.首先有了实验一的基础，有助于本次实验。通过本实验，尝试学习了对库文件进行模糊测试的流程，感觉基本相似，但要进行编译的操作更多了。</p>
+<p>2.使用了另一种debug工具，比较了两种方法的区别，同时也发现自身对与报错信息内容的解读能力有待加强，准备后续进行加强。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/08/Exercise-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -300,7 +476,7 @@
       
         
           
-            <p>CVE-2019-13288</p>
+            <p><a target="_blank" rel="noopener" href="https://www.cvedetails.com/cve/CVE-2019-13288/"><strong>CVE-2019-13288</strong></a>：可能通过精心编制的文件导致无限递归的漏洞。</p>
 <h1 id="下载安装目标"><a href="#下载安装目标" class="headerlink" title="下载安装目标"></a>下载安装目标</h1><h2 id="1-1创建"><a href="#1-1创建" class="headerlink" title="1.1创建"></a>1.1创建</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME</span><br><span class="line">mkdir fuzzing_xpdf &amp;&amp; cd fuzzing_xpdf/</span><br></pre></td></tr></table></figure>
 
 <p>首先为要进行模糊测试的项目创建一个新的文件夹，这应该是一个基本的习惯，但之前我创建新项目的时候没有过多留意过，基本上都是用IDE自动创建的，时间久了再想重新找到的话不太容易，这个点以后会多加注意。</p>
@@ -592,7 +768,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
