@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="随记," />
+  <meta name="keywords" content="实验," />
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="So you want to work in security? (and for some reason ended up here rather than reading other people’s posts on the topic). 本文中，作者面向想要从事安全相关工作的新人提出了一些自己的总结建议，以本文记录其主要内容以及读后感，方便日后回顾。 经验建议1.1兴趣爱好首先作者强调兴">
+<meta name="description" content="CVE-2017-9048：一个堆栈缓冲区溢出漏洞，影响LibXML2的DTD验证功能。 下载与安装目标创建新文件夹： 12cd $HOMEmkdir fuzzing_libxml2 &amp;&amp; cd fuzzing_libxml2  下载并解压libxml2： 12wget http:&#x2F;&#x2F;xmlsoft.org&#x2F;download&#x2F;libxml2-2.9.4.tar.gztar xvf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读后感">
-<meta property="og:url" content="http://example.com/2023/07/07/%E8%AF%BB%E5%90%8E%E6%84%9F/index.html">
+<meta property="og:title" content="Exercise-5（未完）">
+<meta property="og:url" content="http://example.com/2023/07/12/Exercise-5/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="So you want to work in security? (and for some reason ended up here rather than reading other people’s posts on the topic). 本文中，作者面向想要从事安全相关工作的新人提出了一些自己的总结建议，以本文记录其主要内容以及读后感，方便日后回顾。 经验建议1.1兴趣爱好首先作者强调兴">
+<meta property="og:description" content="CVE-2017-9048：一个堆栈缓冲区溢出漏洞，影响LibXML2的DTD验证功能。 下载与安装目标创建新文件夹： 12cd $HOMEmkdir fuzzing_libxml2 &amp;&amp; cd fuzzing_libxml2  下载并解压libxml2： 12wget http:&#x2F;&#x2F;xmlsoft.org&#x2F;download&#x2F;libxml2-2.9.4.tar.gztar xvf">
 <meta property="og:locale">
-<meta property="article:published_time" content="2023-07-07T06:02:54.000Z">
-<meta property="article:modified_time" content="2023-07-08T14:26:29.024Z">
+<meta property="og:image" content="http://example.com/2023/07/12/Exercise-5/1.png">
+<meta property="article:published_time" content="2023-07-12T05:38:15.000Z">
+<meta property="article:modified_time" content="2023-07-12T15:27:21.890Z">
 <meta property="article:author" content="赵禹">
-<meta property="article:tag" content="随记">
+<meta property="article:tag" content="实验">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/07/12/Exercise-5/1.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/07/07/读后感/"/>
+  <link rel="canonical" href="http://example.com/2023/07/12/Exercise-5/"/>
 
 
 
 
 
-  <title>读后感 | 博客</title>
+  <title>Exercise-5（未完） | 博客</title>
   
 
 
@@ -233,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/07/%E8%AF%BB%E5%90%8E%E6%84%9F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/12/Exercise-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -250,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">读后感</h1>
+          <h1 class="post-title" itemprop="name headline">Exercise-5（未完）</h1>
         
 
         <div class="post-meta">
@@ -262,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-07T14:02:54+08:00">
-                2023-07-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-12T13:38:15+08:00">
+                2023-07-12
               </time>
             
 
@@ -300,24 +302,34 @@
       
 
       
-        <p><a target="_blank" rel="noopener" href="http://ifsec.blogspot.com/2018/02/so-you-want-to-work-in-security-and-for.html">So you want to work in security? (and for some reason ended up here rather than reading other people’s posts on the topic).</a></p>
-<p>本文中，作者面向想要从事安全相关工作的新人提出了一些自己的总结建议，以本文记录其主要内容以及读后感，方便日后回顾。</p>
-<h1 id="经验建议"><a href="#经验建议" class="headerlink" title="经验建议"></a>经验建议</h1><h2 id="1-1兴趣爱好"><a href="#1-1兴趣爱好" class="headerlink" title="1.1兴趣爱好"></a>1.1兴趣爱好</h2><p>首先作者强调<strong>兴趣爱好</strong>的重要性，以其身边的业内人士举例，都是先对安全行业先有了兴趣，然后发展为工作。有兴趣爱好，就会花更多的时间精力投入相关工作，从而取得更多的收获，更深入的研究成果。</p>
-<h2 id="1-2自己做事"><a href="#1-2自己做事" class="headerlink" title="1.2自己做事"></a>1.2自己做事</h2><p>作者强调自己做事，不要仅限于遵循预设的课程。（目前感觉不能准确懂得作者想要表达的意思）</p>
-<p>这里我的理解是，在学习中要触类旁通，举一反三。要主动探索，而不是被动接受。</p>
-<h2 id="1-3面对困难-不要放弃"><a href="#1-3面对困难-不要放弃" class="headerlink" title="1.3面对困难 不要放弃"></a>1.3面对困难 不要放弃</h2><p>万事开头难。作者指出在刚开始学习各种资源时，会遇到很多不懂的知识，应当把每一点信息都当作学习的线索。</p>
-<p>以我目前的情况来说，阅读文献时会遇到很多没有提到过的名词概念，将这些点作为新的分支再去进行学习，确实是一个能很好了解文献涉及的相关领域内容的抓手。</p>
-<h2 id="1-4不要害怕失败"><a href="#1-4不要害怕失败" class="headerlink" title="1.4不要害怕失败"></a>1.4不要害怕失败</h2><p>作者指出在工作中，大多数的尝试方法都不会奏效，这是正常现象，不要放弃，而是分析方法失败的原因，并在此基础上继续前进。</p>
-<p>这里我的理解是，科研学习的内容和之前的学习经历不同，因为以前的所有问题都是有解决方法的，例如所有的考试、实验，都是有可供参考的解决答案。但科研内容上，需要解决的都是目前没有答案的问题，所以失败是很正常的，要保持正常心态。</p>
-<h2 id="1-5你比你想象的要聪明"><a href="#1-5你比你想象的要聪明" class="headerlink" title="1.5你比你想象的要聪明"></a>1.5你比你想象的要聪明</h2><p>这里作者鼓励刚开始的新人要敢于尝试，不要轻易怀疑自己的能力。在进行软件审查时也不要轻易放弃字节的想法，不要被“你并不比开发人员聪明”的想法限制住。等到已经对这个行业有所了解后，再更改掉这个想法就好。</p>
-<h1 id="2-学习方法"><a href="#2-学习方法" class="headerlink" title="2.学习方法"></a>2.学习方法</h1><h2 id="2-1利用学习资源"><a href="#2-1利用学习资源" class="headerlink" title="2.1利用学习资源"></a>2.1利用学习资源</h2><p>作者指出当前的学习入门难度比10年前要高很多，但同样也有更多的学习资源可以利用，因此要学会利用资源。</p>
-<h3 id="2-1-1学会问问题"><a href="#2-1-1学会问问题" class="headerlink" title="2.1.1学会问问题"></a>2.1.1学会问问题</h3><p>这里作者举例，不要搜索如何攻击一个程序，这样基本不会得到想要的答案，而是要换个角度，尝试是否能搜索到目标程序的工作原理，源代码，抑或是搜索是否有已经成功攻击的人及其文章、演示等。</p>
-<p>总结来说，就是间接问问题而不是直接问问题本身。</p>
-<h3 id="2-1-2使用推特"><a href="#2-1-2使用推特" class="headerlink" title="2.1.2使用推特"></a>2.1.2使用推特</h3><p>作者指出许多安全社区都会在推特上分享新闻。这里重点在于要能够找到能了解最新资源的途径。</p>
-<hr>
-<h2 id="2-2练习CTF"><a href="#2-2练习CTF" class="headerlink" title="2.2练习CTF"></a>2.2练习CTF</h2><p>作者指出通过CTF是一个很好的学习方法，可以根据任务分数判读各种挑战的难度，从容易的开始，逐渐积累。在进行了一定程度的练习之后，要对现实的真实目标进行尝试。</p>
-<h1 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h1><p>读完这篇文章主要有以下两点收获，一是对将来会遇到的问题有了提前的预期，二是对今后的学习规划有了更清晰的方向。</p>
-<p>这是我的第一篇博客，确实感觉自己也不太会写东西，可能也是从小就对文学作品的接触比较少。但今后还是会坚持写的吧，确实是写的时候也是对所学所感的一次记录。希望能稳步向前。</p>
+        <p><a target="_blank" rel="noopener" href="https://nvd.nist.gov/vuln/detail/CVE-2017-9048"><strong>CVE-2017-9048</strong></a>：一个堆栈缓冲区溢出漏洞，影响LibXML2的DTD验证功能。</p>
+<h1 id="下载与安装目标"><a href="#下载与安装目标" class="headerlink" title="下载与安装目标"></a>下载与安装目标</h1><p><strong>创建新文件夹</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME</span><br><span class="line">mkdir fuzzing_libxml2 &amp;&amp; cd fuzzing_libxml2</span><br></pre></td></tr></table></figure>
+
+<p><strong>下载并解压<code>libxml2</code>：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://xmlsoft.org/download/libxml2-2.9.4.tar.gz</span><br><span class="line">tar xvf libxml2-2.9.4.tar.gz &amp;&amp; cd libxml2-2.9.4/</span><br></pre></td></tr></table></figure>
+
+<p><strong>构建并安装&#96;libtiff·：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-dev</span><br><span class="line">CC=afl-clang-lto CXX=afl-clang-lto++ CFLAGS=&quot;-fsanitize=address&quot; CXXFLAGS=&quot;-fsanitize=address&quot; LDFLAGS=&quot;-fsanitize=address&quot; ./configure --prefix=&quot;$HOME/fuzzing_libxml2/libxml2-2.9.4/install&quot; --disable-shared --without-debug --without-ftp --without-http --without-legacy --without-python LIBS=&#x27;-ldl&#x27;</span><br><span class="line">make -j$(nproc)</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试功能：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./xmllint --memory ./test/wml.xml</span><br></pre></td></tr></table></figure>
+
+<h1 id="模糊测试"><a href="#模糊测试" class="headerlink" title="模糊测试"></a>模糊测试</h1><p><strong>语料库：</strong></p>
+<p>使用实验指导中给出的<code>SampleInput.xml</code>作为语料库。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir afl_in &amp;&amp; cd afl_in</span><br><span class="line">wget https://raw.githubusercontent.com/antonio-morales/Fuzzing101/main/Exercise%205/SampleInput.xml</span><br><span class="line">cd ..</span><br></pre></td></tr></table></figure>
+
+<p><strong>自定义字典：</strong></p>
+<p>这里使用<code>AFL++</code>提供的<code>XML</code>字典。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir dictionaries &amp;&amp; cd dictionaries</span><br><span class="line">wget https://raw.githubusercontent.com/AFLplusplus/AFLplusplus/stable/dictionaries/xml.dict</span><br><span class="line">cd ..</span><br></pre></td></tr></table></figure>
+
+<p><strong>模糊测试：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afl-fuzz -m none -i ./afl_in -o afl_out -s 123 -x ./dictionaries/xml.dict -D -M master -- ./xmllint --memory --noenc --nocdata --dtdattr --loaddtd --valid --xinclude @@</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afl-fuzz -m none -i ./afl_in -o afl_out -s 234 -S slave1 -- ./xmllint --memory --noenc --nocdata --dtdattr --loaddtd --valid --xinclude @@</span><br></pre></td></tr></table></figure>
+
+<p>未完，目前还没测试出crash。</p>
+<p><img src="/2023/07/12/Exercise-5/1.png" alt="img"></p>
 
       
     </div>
@@ -335,7 +347,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E9%9A%8F%E8%AE%B0/" rel="tag"># 随记</a>
+            <a href="/tags/%E5%AE%9E%E9%AA%8C/" rel="tag"># 实验</a>
           
         </div>
       
@@ -348,14 +360,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2023/07/11/Exercise-4/" rel="next" title="Exercise-4">
+                <i class="fa fa-chevron-left"></i> Exercise-4
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2023/07/08/Exercise-1/" rel="prev" title="Exercise-1">
-                Exercise-1 <i class="fa fa-chevron-right"></i>
+              <a href="/2023/07/12/How-to-give-a-good-research-talk/" rel="prev" title="How to give a good research talk">
+                How to give a good research talk <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -479,7 +495,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%8F%E9%AA%8C%E5%BB%BA%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">经验建议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD"><span class="nav-number">1.1.</span> <span class="nav-text">1.1兴趣爱好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E8%87%AA%E5%B7%B1%E5%81%9A%E4%BA%8B"><span class="nav-number">1.2.</span> <span class="nav-text">1.2自己做事</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3%E9%9D%A2%E5%AF%B9%E5%9B%B0%E9%9A%BE-%E4%B8%8D%E8%A6%81%E6%94%BE%E5%BC%83"><span class="nav-number">1.3.</span> <span class="nav-text">1.3面对困难 不要放弃</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4%E4%B8%8D%E8%A6%81%E5%AE%B3%E6%80%95%E5%A4%B1%E8%B4%A5"><span class="nav-number">1.4.</span> <span class="nav-text">1.4不要害怕失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5%E4%BD%A0%E6%AF%94%E4%BD%A0%E6%83%B3%E8%B1%A1%E7%9A%84%E8%A6%81%E8%81%AA%E6%98%8E"><span class="nav-number">1.5.</span> <span class="nav-text">1.5你比你想象的要聪明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2.学习方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1%E5%88%A9%E7%94%A8%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90"><span class="nav-number">2.1.</span> <span class="nav-text">2.1利用学习资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1%E5%AD%A6%E4%BC%9A%E9%97%AE%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1学会问问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2%E4%BD%BF%E7%94%A8%E6%8E%A8%E7%89%B9"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2使用推特</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2%E7%BB%83%E4%B9%A0CTF"><span class="nav-number">2.2.</span> <span class="nav-text">2.2练习CTF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">3.总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85%E7%9B%AE%E6%A0%87"><span class="nav-number">1.</span> <span class="nav-text">下载与安装目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">模糊测试</span></a></li></ol></div>
             
 
           </div>
