@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="实验," />
+  <meta name="keywords" content="细读," />
 
 
 
@@ -79,21 +79,18 @@
 
 
 
-<meta name="description" content="实验-3">
+<meta name="description" content="文章介绍了一篇论文&#x2F;报告的系统结构。具体来说，文章对一篇论文中常见的结构给出建议，包括每部分应写的内容以及注意事项。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Exercise-3">
-<meta property="og:url" content="http://example.com/2023/07/10/Exercise-3/index.html">
+<meta property="og:title" content="The structure of paper&#x2F;report in Systems">
+<meta property="og:url" content="http://example.com/2023/07/13/The-structure-of-paper-report-in-Systems/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="实验-3">
+<meta property="og:description" content="文章介绍了一篇论文&#x2F;报告的系统结构。具体来说，文章对一篇论文中常见的结构给出建议，包括每部分应写的内容以及注意事项。">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2023/07/10/Exercise-3/image-20230710163625836.png">
-<meta property="og:image" content="http://example.com/2023/07/10/Exercise-3/image-20230710214359838.png">
-<meta property="article:published_time" content="2023-07-10T06:32:03.000Z">
-<meta property="article:modified_time" content="2023-07-12T15:41:36.315Z">
+<meta property="article:published_time" content="2023-07-13T06:19:44.000Z">
+<meta property="article:modified_time" content="2023-07-13T09:23:57.343Z">
 <meta property="article:author" content="赵禹">
-<meta property="article:tag" content="实验">
+<meta property="article:tag" content="细读">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/07/10/Exercise-3/image-20230710163625836.png">
 
 
 
@@ -123,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/07/10/Exercise-3/"/>
+  <link rel="canonical" href="http://example.com/2023/07/13/The-structure-of-paper-report-in-Systems/"/>
 
 
 
 
 
-  <title>Exercise-3 | 博客</title>
+  <title>The structure of paper/report in Systems | 博客</title>
   
 
 
@@ -236,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/10/Exercise-3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/13/The-structure-of-paper-report-in-Systems/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -253,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Exercise-3</h1>
+          <h1 class="post-title" itemprop="name headline">The structure of paper/report in Systems</h1>
         
 
         <div class="post-meta">
@@ -265,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-10T14:32:03+08:00">
-                2023-07-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-13T14:19:44+08:00">
+                2023-07-13
               </time>
             
 
@@ -289,10 +286,6 @@
           
 
           
-              <div class="post-description">
-                  实验-3
-              </div>
-          
 
         </div>
       </header>
@@ -307,53 +300,92 @@
       
 
       
-        <p> <a target="_blank" rel="noopener" href="https://www.cvedetails.com/cve/CVE-2017-13028/"><strong>CVE-2017-13028</strong></a>：一种可通过BOOTP数据包（引导协议）触发的越界读取漏洞。</p>
-<h1 id="下载与安装目标"><a href="#下载与安装目标" class="headerlink" title="下载与安装目标"></a>下载与安装目标</h1><p><strong>创建新文件夹</strong>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME</span><br><span class="line">mkdir fuzzing_tcpdump &amp;&amp; cd fuzzing_tcpdump/</span><br></pre></td></tr></table></figure>
+        <p>文章介绍了一篇论文&#x2F;报告的系统结构。具体来说，文章对一篇论文中常见的结构给出建议，包括每部分应写的内容以及注意事项。</p>
+<span id="more"></span>
 
-<p><strong>下载并解压<code>libpcap</code>和<code>tcpdump</code>：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/the-tcpdump-group/libpcap/archive/refs/tags/libpcap-1.8.0.tar.gz</span><br><span class="line">tar -xzvf libpcap-1.8.0.tar.gz</span><br><span class="line"></span><br><span class="line">wget https://github.com/the-tcpdump-group/tcpdump/archive/refs/tags/tcpdump-4.9.2.tar.gz</span><br><span class="line">tar -xzvf tcpdump-4.9.2.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p><strong>构建并安装<code>libpcap</code>和<code>tcpdump</code>：</strong></p>
-<p>这里首先要将<code>libpcap-libpcap-1.8.0</code>的文件夹重命名为<code>libpcap-1.8.0</code>，否则<code>tcpdump</code>会找不到<code>libpcap.a</code>的本地路径：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv libpcap-libpcap-1.8.0/ libpcap-1.8.0</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME/fuzzing_tcpdump/libpcap-1.8.0/</span><br><span class="line">./configure --enable-shared=no</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">cd $HOME/fuzzing_tcpdump/tcpdump-tcpdump-4.9.2/</span><br><span class="line">./configure --prefix=&quot;$HOME/fuzzing_tcpdump/install/&quot;</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<p><strong>测试功能：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HOME/fuzzing_tcpdump/install/sbin/tcpdump -h</span><br></pre></td></tr></table></figure>
-
-<h1 id="模糊测试"><a href="#模糊测试" class="headerlink" title="模糊测试"></a>模糊测试</h1><p><strong>语料库：</strong></p>
-<p>该实验的语料库可以直接使用<code>tcpdump</code>自带的测试用例,为位于其<code>tests</code>文件夹中。</p>
-<p><strong>AddressSanitizer（ASan）：</strong></p>
-<p><code>ASan</code>是一种用于C和C++的快速内存错误检测器，由一个编译器指令插入模块和一个运行时库组成。该工具能够发现对堆、堆栈和全局对象的越界访问，以及释放后使用、双重释放和内存泄漏错误。从3.1版本开始与LLVM编译器工具链集成。</p>
-<p><strong>用<code>afl-clang-lto</code>在启用<code>ASan</code>的情况下，编译<code>libpcap</code>和<code>tcpdump</code>：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rm -r $HOME/fuzzing_tcpdump/install</span><br><span class="line">cd $HOME/fuzzing_tcpdump/libpcap-1.8.0/</span><br><span class="line">make clean</span><br><span class="line"></span><br><span class="line">cd $HOME/fuzzing_tcpdump/tcpdump-tcpdump-4.9.2/</span><br><span class="line">make clean</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME/fuzzing_tcpdump/libpcap-1.8.0/</span><br><span class="line">export LLVM_CONFIG=&quot;llvm-config-11&quot;</span><br><span class="line">CC=afl-clang-lto ./configure --enable-shared=no --prefix=&quot;$HOME/fuzzing_tcpdump/install/&quot;</span><br><span class="line">AFL_USE_ASAN=1 make</span><br><span class="line"></span><br><span class="line">cd $HOME/fuzzing_tcpdump/tcpdump-tcpdump-4.9.2/</span><br><span class="line">AFL_USE_ASAN=1 CC=afl-clang-lto ./configure --prefix=&quot;$HOME/fuzzing_tcpdump/install/&quot;</span><br><span class="line">AFL_USE_ASAN=1 make</span><br><span class="line">AFL_USE_ASAN=1 make install</span><br></pre></td></tr></table></figure>
-
-<p>其中，</p>
-<p><code>AFL_USE_ASAN=1</code>：设置环境变量 <code>AFL_USE_ASAN</code> 的值为 1，启用 AFL 的 ASAN 功能，以便在模糊测试过程中检测内存错误。</p>
-<p><strong>模糊测试：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afl-fuzz -m none -i $HOME/fuzzing_tcpdump/tcpdump-tcpdump-4.9.2/tests/ -o $HOME/fuzzing_tcpdump/out/ -s 123 -- $HOME/fuzzing_tcpdump/install/sbin/tcpdump -vvvvXX -ee -nn -r @@</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/07/10/Exercise-3/image-20230710163625836.png" alt="image-20230710163625836"></p>
-<h1 id="检查漏洞"><a href="#检查漏洞" class="headerlink" title="检查漏洞"></a>检查漏洞</h1><p><strong>检查：</strong></p>
-<p>本次实验用<code>ASan</code>进行debug，比其前两次实验，不需要重新对目标程序进行编译，只需用运行崩溃文件，即可得到如下报错信息。</p>
-<p><img src="/2023/07/10/Exercise-3/image-20230710214359838.png" alt="image-20230710214359838"></p>
-<p>根据报错信息，可知是发生了内存溢出。</p>
-<p><strong>漏洞修复：</strong></p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/the-tcpdump-group/tcpdump/commit/85078eeaf4bf8fcdc14a4e79b516f92b6ab520fc#diff-05f854a9033643de07f0d0059bc5b98f3b314eeb1e2499ea1057e925e6501ae8L381">CVE-2017-13028的修复</a></li>
+<h1 id="一些规则："><a href="#一些规则：" class="headerlink" title="一些规则："></a>一些规则：</h1><ul>
+<li><strong>递归1：</strong>在每一节中，第一段应该是该节的摘要或概述。</li>
+<li><strong>递归2：</strong>在每一段中，第一行（或第二行）应该与该段的摘要相对应。</li>
+<li><strong>由高到低：</strong>从高等级开始慢慢增加细节。</li>
+<li><strong>让读者做好准备：</strong>应该让读者知道你想达到的目的。</li>
+<li><strong>适应：</strong>如果要违反这些规则，要确保有充分的理由。</li>
+<li><strong>避免大量介绍：</strong>如果不能在1.5页内写完介绍，就说明你的脑海中不是很清楚，或没有使用正确的抽象级别。</li>
+<li><strong>总页数：</strong>约15页。</li>
 </ul>
-<p>这里直接给出官方的修复方法。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>1.通过本实验，再一次地熟悉了afl的使用流程，并学习了新的工具ASan。</p>
-<p>2.本次实验中，模糊测试找到漏洞的用时比之前要久，猜测可能是以下原因导致：</p>
-<ol>
-<li>语料库中内容过多，除了数据包文件，还有许多可执行文件和Shell脚本文件，猜测这可能使得测试覆盖率下降，影响测试效果。</li>
-<li>可能该漏洞相比前两个是实验中的漏洞更加隐蔽，更难触发，因此需要花更多时间。</li>
-</ol>
-<p>希望通过后续实验，继续加深对afl的了解，并验证猜想是否正确。</p>
+<h1 id="各部分："><a href="#各部分：" class="headerlink" title="各部分："></a>各部分：</h1><h2 id="1-摘要："><a href="#1-摘要：" class="headerlink" title="1.摘要："></a>1.摘要：</h2><p>1段，200~300个字。是论文的广告和预告片，是文章内容的摘要，要<strong>吸引读者的注意力</strong>，让读者阅读更多。</p>
+<ul>
+<li><strong>1-2行：</strong>本文的目表。</li>
+<li><strong>1-2行：</strong>工作的动机和重要性。</li>
+<li><strong>1-2行：</strong>工作的结果或贡献。</li>
+</ul>
+<h2 id="2-正文："><a href="#2-正文：" class="headerlink" title="2.正文："></a>2.正文：</h2><p>以下中<code>*</code>表示1段或最多两段，<code>**</code>表示按需分段，但也不要太多。</p>
+<p><strong>1.介绍：</strong>【1-1.5页】</p>
+<ul>
+<li>*问题是什么，动机，主要贡献。</li>
+<li>*问题的定义，意义。</li>
+<li>*以前的工作（每篇相关论文最多一行，细节在下一节中介绍）。</li>
+<li>*本文的结果和贡献。</li>
+<li>*本文的其余部分结构如下。“在第2节中，……”</li>
+</ul>
+<p><strong>2.背景和模型：</strong>【1-1.15页】</p>
+<ul>
+<li>*定义、场景、模型。</li>
+<li>*以前的工作（仅当这将有助于显示你的工作不同或更好时，才提供详细信息）。</li>
+<li>*以前工作的不足、你提出的但以前没有的建议（创新点）。</li>
+<li>*你工作的假设和限制。</li>
+</ul>
+<p><strong>3.想法：</strong>【按要求】</p>
+<ul>
+<li>*简述创新。</li>
+<li>*新的定义（如果有必要）。</li>
+<li>**想法是什么以及如何工作。</li>
+<li>**细微之处的说明、澄清。</li>
+</ul>
+<p><strong>4.分析：</strong>【按要求】</p>
+<ul>
+<li>*本节中要证明的内容的概述。</li>
+<li>*分析特定定义，即在证明中使用的图形结构。</li>
+<li>**分析-证明。</li>
+<li>*注释-在直观或实用水平的证明的含义。</li>
+</ul>
+<p><strong>5.实验结果：</strong>【按要求】</p>
+<ul>
+<li>*实验概述：实验测量什么、没测什么，为什么。</li>
+<li>*模拟模型或测试工具。</li>
+<li>**实验结果：<ul>
+<li>使用标题来区分实验。</li>
+<li>对每个图都说明出现原因。</li>
+<li>解释图中细节：看到了什么、趋势是什么、为什么是这样的趋势。</li>
+<li>用统计解释加强结果：置信区间、相关系数等。</li>
+<li>每个数据都应该是独立的、标题应该是可读易懂的。</li>
+<li>评论、讨论、解释。</li>
+</ul>
+</li>
+</ul>
+<p><strong>6.讨论：</strong>【1-2页】</p>
+<p>如果还有空间，可以通过意义、与其他工作的关系、可能的实际应用等角度强调工作的重要性。</p>
+<ul>
+<li>*章节概述。</li>
+<li>**根据需要分段。</li>
+</ul>
+<p><strong>7.结论：</strong>【1-1.5页】</p>
+<p>结论非常重要。可以更具体的说明在引言中概述的这项工作的内容。</p>
+<ul>
+<li>*概述工作内容。</li>
+<li>*主要成果和贡献。</li>
+<li>*关于重要性或实际使用的提示（你的结果如何帮助实践中的某人或帮助另一个研究人员使用你的模拟器）。</li>
+<li>*未来的工作，强调工作的重要性，但要避免给出想法。</li>
+</ul>
+<p><strong>8.参考文献：</strong></p>
+<p>必须正确、完整、准确。</p>
+<p><strong>9.附录：</strong>【按要求】</p>
+<p>附录通常是无人区，想写什么就写什么。</p>
+<p>建议用途：</p>
+<ul>
+<li>提供额外的结果来加强你的论点，但不是关键的。</li>
+<li>一个冗长的证明或讨论的细节来保持论文的流畅性。</li>
+<li>解决一个能显示出你已经深入考虑过的问题。</li>
+</ul>
 
       
     </div>
@@ -371,7 +403,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E5%AE%9E%E9%AA%8C/" rel="tag"># 实验</a>
+            <a href="/tags/%E7%BB%86%E8%AF%BB/" rel="tag"># 细读</a>
           
         </div>
       
@@ -384,8 +416,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/07/09/Exercise-2/" rel="next" title="Exercise-2">
-                <i class="fa fa-chevron-left"></i> Exercise-2
+              <a href="/2023/07/12/How-to-give-a-good-research-talk/" rel="next" title="How to give a good research talk">
+                <i class="fa fa-chevron-left"></i> How to give a good research talk
               </a>
             
           </div>
@@ -393,10 +425,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/07/11/Exercise-4/" rel="prev" title="Exercise-4">
-                Exercise-4 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -519,7 +547,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85%E7%9B%AE%E6%A0%87"><span class="nav-number">1.</span> <span class="nav-text">下载与安装目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">模糊测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%BC%8F%E6%B4%9E"><span class="nav-number">3.</span> <span class="nav-text">检查漏洞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E8%A7%84%E5%88%99%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">一些规则：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%84%E9%83%A8%E5%88%86%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">各部分：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%91%98%E8%A6%81%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">1.摘要：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%AD%A3%E6%96%87%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">2.正文：</span></a></li></ol></li></ol></div>
             
 
           </div>
