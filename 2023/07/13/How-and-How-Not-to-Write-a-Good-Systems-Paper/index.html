@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="系统论文写作与投稿," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="An Evaluation of the Ninth SOSP Submissions - or - How (and How Not) to Write a Good Systems Paper 第九届操作系统研讨会提交的83篇论文，只有16篇被选作在研讨会上发表。为此本文总结了被拒绝论文都表现出的类似的弱点，介绍评估论文使用的标准，以指出技术论文中反复出现的常见问题，使未来的作者更容易地避免这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="怎么写好一篇好的系统论文">
+<meta property="og:url" content="http://example.com/2023/07/13/How-and-How-Not-to-Write-a-Good-Systems-Paper/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="An Evaluation of the Ninth SOSP Submissions - or - How (and How Not) to Write a Good Systems Paper 第九届操作系统研讨会提交的83篇论文，只有16篇被选作在研讨会上发表。为此本文总结了被拒绝论文都表现出的类似的弱点，介绍评估论文使用的标准，以指出技术论文中反复出现的常见问题，使未来的作者更容易地避免这">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-07-13T15:11:43.000Z">
+<meta property="article:modified_time" content="2023-07-14T15:45:42.544Z">
+<meta property="article:author" content="赵禹">
+<meta property="article:tag" content="系统论文写作与投稿">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2023/07/13/How-and-How-Not-to-Write-a-Good-Systems-Paper/"/>
+
+
+
+
+
+  <title>怎么写好一篇好的系统论文 | 博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/13/How-and-How-Not-to-Write-a-Good-Systems-Paper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">怎么写好一篇好的系统论文</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-13T23:11:43+08:00">
+                2023-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a target="_blank" rel="noopener" href="https://www.usenix.org/legacy/events/samples/submit/advice.html">An Evaluation of the Ninth SOSP Submissions - or - How (and How Not) to Write a Good Systems Paper</a></p>
+<p>第九届操作系统研讨会提交的83篇论文，只有16篇被选作在研讨会上发表。为此本文总结了被拒绝论文都表现出的类似的弱点，介绍评估论文使用的标准，以指出技术论文中反复出现的常见问题，使未来的作者更容易地避免这些问题。</p>
+<span id="more"></span>
+
+<h1 id="论文分类"><a href="#论文分类" class="headerlink" title="论文分类"></a>论文分类</h1><p>通常论文可以很自然地被分为以下三类：</p>
+<ul>
+<li>对整个系统的全球调查或通过对系统中具体主题的选择性审查，提出了一个真正的系统。</li>
+<li>提供了一个未实现的系统，但使用了您认为技术社区应该知道的想法或技术。</li>
+<li>涉及理论领域的一个主题，例如性能建模或安全验证。</li>
+</ul>
+<p>显然，单一的一套评价标准不能统一适用于这些类别；然而，许多标准同样适用于这三种情况。为此，本文在后续介绍评估标准时会讲清适用于哪类论文。</p>
+<h1 id="提交材料的评估标准"><a href="#提交材料的评估标准" class="headerlink" title="提交材料的评估标准"></a>提交材料的评估标准</h1><h3 id="新颖的想法："><a href="#新颖的想法：" class="headerlink" title="新颖的想法："></a>新颖的想法：</h3><p><strong>1.论文中的想法是新的吗？</strong>对于向与原创作品有关的会议或期刊提交的论文，至少应该含有一个创新点。</p>
+<p><strong>2.你怎么知道的？</strong>你必须熟悉文章所含领域的最新的技术和研究现状，才能知道你的工作是原创的。在第一类论文中，最常见的问题就是缺乏创新。</p>
+<p><strong>3.你能简明扼要地陈述这个新想法吗？</strong>如果论文是要提高当前知识状态，你的读者应该能找到新的想法并能理解它们。如果你不能让读者理解，可能你自身并不真正理解这个想法。</p>
+<p><strong>4.问题究竟是被怎样解决的？</strong>不能只给出解决方案，要具体一点，一定要解释为什么你的问题不能用以前的方法解决。</p>
+<p><strong>5.这些想法是否足够重要，足以证明一篇论文的合理性？</strong>不要将总的努力和实现的新工作混为一谈，对于现有技术的一到两个小的改进，几段话来描述就够了，没必要发一篇论文。</p>
+<p><strong>6.所描述的工作是否与现有的相关工作有显著差异？</strong></p>
+<blockquote>
+<p>If you can’t, you should ask yourself why you are writing the paper and why anyone except your mother should want to read it.</p>
+</blockquote>
+<p><strong>7.所有的相关工作都被引用了吗？你真的读过引用的材料吗？</strong>如果没有，很难证明你工作的独特性、优越性。</p>
+<p><strong>8.与以前工作的对比是否清晰明了？</strong>要具体说明差别在哪里。</p>
+<p><strong>9.这项工作是否包括对早期但未经证实的想法的重大扩展、验证或否定？</strong></p>
+<p><strong>10.你提到的最老的论文是什么？最新的？你提到过其他机构的类似工作吗？你参考过技术报告、未发表的备忘录、个人通信吗？</strong>这些问题的答案有助于提醒你在知识或理解方面存在盲点。</p>
+<h3 id="真实："><a href="#真实：" class="headerlink" title="真实："></a>真实：</h3><p><strong>11.该论文是否描述了已经实际实施的内容？</strong>在开头就应该说明所讨论的系统是否真实存在。</p>
+<p><strong>12.如果该系统已经实施，它是如何使用的，这种使用表明了这些想法的什么实际重要性？</strong>如果实施的系统包含新的想法，那么解释它们在实践中是如何产生的是很重要的。</p>
+<p><strong>13.如果该系统尚未实施，那么这些想法现在是否有理由发表？</strong>除非有明显高质量的新想法，否则纯设计的论文不受欢迎。</p>
+<h3 id="经验教训："><a href="#经验教训：" class="headerlink" title="经验教训："></a>经验教训：</h3><p><strong>14.你从工作中学到了什么？</strong>如果你什么都没学到，你的读者肯定也不会。</p>
+<p><strong>15.读者应该从这篇论文中学到什么？</strong>把经验教训将清楚。</p>
+<p><strong>16.这些经验教训的普遍适用性如何？</strong>一定要清楚地说明你的结论所依据的假设。小心基于缺乏知识或经验的概括。</p>
+<h3 id="选择："><a href="#选择：" class="headerlink" title="选择："></a>选择：</h3><p><strong>17.在有不同选择时，考虑了哪些替代方案，为什么选了这些选择？</strong>一篇好的论文不仅仅是描述，而是解释。</p>
+<p><strong>18.这些选择被证明是正确的吗？如果是，是因为什么原因激励这么选？如果没有，你从这次经历中学到了什么教训？你有多少次发现自己说“这很管用，但原因不对”？</strong>这样的声明代表了智慧，可能会让你的读者受益。</p>
+<h3 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h3><p><strong>19.这项工作所基于的假设是什么？</strong>确保把工作的假设都提前告知读者。</p>
+<p><strong>20.它们现实吗？</strong>对于“未实现的系统”论文，这相当于询问设计的假设是否有望支持成功的实现。</p>
+<p><strong>21.这项工作对这些假设的扰动有多敏感？</strong>如果结果建立在一个脆弱的假设上，它对读者的用处将不如建立在更广泛、更坚实的基础上的结果。</p>
+<p><strong>22.如果提出一个正式的模型，它是否提供了新的信息和见解？</strong>简单地为模型本身定义模型并不是很有用。一个深刻的定理胜过一千个定义。</p>
+<h3 id="集中："><a href="#集中：" class="headerlink" title="集中："></a>集中：</h3><p><strong>23.介绍材料中是否包含您主要开发所不需要的多余内容？</strong>“真实系统”的论文尤其有不相关的描述。</p>
+<p><strong>24.你是否从以前出版的作品中包含了足够的材料，使你的读者能够遵循你的论点？</strong>不要以为读者已经阅读了上周内的每一篇参考论文，将参考的论文放在开头供即时参考。</p>
+<h3 id="演示："><a href="#演示：" class="headerlink" title="演示："></a>演示：</h3><p><strong>25.这些想法是否以清晰和合乎逻辑的方式组织和呈现？</strong></p>
+<p><strong>26.术语在使用前是否已定义？</strong></p>
+<p><strong>27.转发参考是否保持在最低限度？</strong>当读者反复遇到诸如“每个文件都由一系列项目组成，稍后将对此进行详细描述”之类的语句时，他们会感到恼火。</p>
+<p><strong>28.是先写的摘要吗？它是否传达了论文的重要思想？</strong>摘要通常是一个散文目录，而不是论文技术内容的精确性。</p>
+<p><strong>29.论文写完了吗？</strong></p>
+<h1 id="写作风格"><a href="#写作风格" class="headerlink" title="写作风格"></a>写作风格</h1><p><strong>30.文字是否清晰简洁？单词拼写和使用正确吗？这些句子完整且语法正确吗？是否避免歧义、俚语？</strong>如果在提交发表之前，你对材料没有足够的关注来纠正语法、拼写和用法上的错误，那么你为什么要期望审稿人仔细阅读论文呢？</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上的问题可以帮助你写出一篇更好的技术论文。其中一些问题涉及“系统”论文中的特定问题；其他的一般适用于技术论文。写一篇好论文是一项艰苦的工作，但你会被更多人知道，并在期刊和论文集读者群体中更好地理解你的想法。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C%E4%B8%8E%E6%8A%95%E7%A8%BF/" rel="tag"># 系统论文写作与投稿</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/07/13/The-structure-of-paper-report-in-Systems/" rel="next" title="The structure of paper/report in Systems">
+                <i class="fa fa-chevron-left"></i> The structure of paper/report in Systems
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">论文分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E6%9D%90%E6%96%99%E7%9A%84%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86"><span class="nav-number">2.</span> <span class="nav-text">提交材料的评估标准</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E9%A2%96%E7%9A%84%E6%83%B3%E6%B3%95%EF%BC%9A"><span class="nav-number">2.0.1.</span> <span class="nav-text">新颖的想法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%9F%E5%AE%9E%EF%BC%9A"><span class="nav-number">2.0.2.</span> <span class="nav-text">真实：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%8F%E9%AA%8C%E6%95%99%E8%AE%AD%EF%BC%9A"><span class="nav-number">2.0.3.</span> <span class="nav-text">经验教训：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%EF%BC%9A"><span class="nav-number">2.0.4.</span> <span class="nav-text">选择：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%EF%BC%9A"><span class="nav-number">2.0.5.</span> <span class="nav-text">背景：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E4%B8%AD%EF%BC%9A"><span class="nav-number">2.0.6.</span> <span class="nav-text">集中：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%94%E7%A4%BA%EF%BC%9A"><span class="nav-number">2.0.7.</span> <span class="nav-text">演示：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E4%BD%9C%E9%A3%8E%E6%A0%BC"><span class="nav-number">3.</span> <span class="nav-text">写作风格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赵禹</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
