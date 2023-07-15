@@ -229,6 +229,171 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/15/Exercise-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/07/15/Exercise-6/" itemprop="url">Exercise-6（进行测试时受阻）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-15T14:49:17+08:00">
+                2023-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a target="_blank" rel="noopener" href="https://www.cvedetails.com/cve/CVE-2016-4994/"><strong>CVE-2016-4994</strong></a> ：一个可通过特制的XCF文件触发的“释放后使用”漏洞。</p>
+<p>本实验的实验指导省略了很多步骤，且对一些操作没有解释说明，上网也很难直接找到相关操作的解释原因。本实验的进展受到了一定的阻碍。</p>
+<h1 id="下载与安装目标"><a href="#下载与安装目标" class="headerlink" title="下载与安装目标"></a>下载与安装目标</h1><p><strong>创建新文件夹</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME</span><br><span class="line">mkdir Fuzzing_gimp &amp;&amp; cd Fuzzing_gimp</span><br></pre></td></tr></table></figure>
+
+<p><strong>下载需要依赖：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential libatk1.0-dev libfontconfig1-dev libcairo2-dev libgudev-1.0-0 libdbus-1-dev libdbus-glib-1-dev libexif-dev libxfixes-dev libgtk2.0-dev python2.7-dev libpango1.0-dev libglib2.0-dev zlib1g-dev intltool libbabl-dev</span><br></pre></td></tr></table></figure>
+
+<p><strong>下载并解压<code>libgegl-0.2</code>：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.gimp.org/pub/gegl/0.2/gegl-0.2.0.tar.bz2</span><br><span class="line">tar xvf gegl-0.2.0.tar.bz2 &amp;&amp; cd gegl-0.2.0</span><br></pre></td></tr></table></figure>
+
+<p><strong>更改两处：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/CODEC_CAP_TRUNCATED/AV_CODEC_CAP_TRUNCATED/g&#x27; ./operations/external/ff-load.c</span><br><span class="line">sed -i &#x27;s/CODEC_FLAG_TRUNCATED/AV_CODEC_FLAG_TRUNCATED/g&#x27; ./operations/external/ff-load.c</span><br></pre></td></tr></table></figure>
+
+<p>这里为什么要做此修改，指导中没有说明。</p>
+<p><strong>构建并安装<code>libgegl-0.2</code>：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure --enable-debug --disable-glibtest  --without-vala --without-cairo --without-pango --without-pangocairo --without-gdk-pixbuf --without-lensfun --without-libjpeg --without-libpng --without-librsvg --without-openexr --without-sdl --without-libopenraw --without-jasper --without-graphviz --without-lua --without-libavformat --without-libv4l --without-libspiro --without-exiv2 --without-umfpack</span><br><span class="line">make -j$(nproc)</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<p><strong>下载并解压<code>GIMP-2.8.16</code>：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line">wget https://mirror.klaus-uwe.me/gimp/pub/gimp/v2.8/gimp-2.8.16.tar.bz2</span><br><span class="line">tar xvf gimp-2.8.16.tar.bz2 &amp;&amp; cd gimp-2.8.16/</span><br></pre></td></tr></table></figure>
+
+<p><strong>用<code>afl-clang-lto</code>作为编译器，编译构建<code>GIMP</code>：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CC=afl-clang-lto CXX=afl-clang-lto++ PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/Fuzzing_gimp/gegl-0.2.0/ CFLAGS=&quot;-fsanitize=address&quot; CXXFLAGS=&quot;-fsanitize=address&quot; LDFLAGS=&quot;-fsanitize=address&quot; ./configure --disable-gtktest --disable-glibtest --disable-alsatest --disable-nls --without-libtiff --without-libjpeg --without-bzip2 --without-gs --without-libpng --without-libmng --without-libexif --without-aa --without-libxpm --without-webkit --without-librsvg --without-print --without-poppler --without-cairo-pdf --without-gvfs --without-libcurl --without-wmf --without-libjasper --without-alsa --without-gudev --disable-python --enable-gimp-console --without-mac-twain --without-script-fu --without-gudev --without-dbus --disable-mp --without-linux-input --without-xvfb-run --with-gif-compression=none --without-xmc --with-shm=none --enable-debug  --prefix=&quot;$HOME/Fuzzing_gimp/gimp-2.8.16/install&quot;</span><br><span class="line">make -j$(nproc)</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>命令中禁用了许多测试以及许多库，具体原因没有说明，可能是为了减短编译时间。</p>
+<h1 id="模糊测试"><a href="#模糊测试" class="headerlink" title="模糊测试"></a>模糊测试</h1><p><strong>持久模式：</strong></p>
+<p>在持久模式下，AFL在执行测试用例后不会立即终止进程，而是保持进程的活动状态，等待下一个输入测试用例。这样，AFL可以避免为每个测试用例启动新的进程，从而节省了一些开销，并提高了Fuzzer的效率。</p>
+<p>为了启用持久模式，对<code>GIMP</code>的<code>xcf.c</code>源码做如下修改:</p>
+<p><img src="/2023/07/15/Exercise-6/image-20230715152657972.png" alt="image-20230715152657972"></p>
+<p><img src="/2023/07/15/Exercise-6/image-20230715152606117.png" alt="image-20230715152606117"></p>
+<p><strong>语料库：</strong></p>
+<p>使用实验指导中给出的<code>SampleInput.xcf</code>作为语料库。</p>
+<p><strong>首先删除一些不需要的插件来节省启动时间：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm ./install/lib/gimp/2.0/plug-ins/*</span><br></pre></td></tr></table></figure>
+
+<p><strong>模糊测试：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ASAN_OPTIONS=detect_leaks=0,abort_on_error=1,symbolize=0 afl-fuzz -i &#x27;./afl_in&#x27; -o &#x27;./afl_out&#x27; -D -t 100 -- ./install/bin/gimp-console-2.8 --verbose -d -f @@</span><br></pre></td></tr></table></figure>
+
+<p>首先是出现如下错误：</p>
+<img src="image-20230715195357036.png" alt="image-20230715195357036" style="zoom:80%;" />
+
+<p><img src="/2023/07/15/Exercise-6/image-20230715195333854.png" alt="image-20230715195333854"></p>
+<p>经分析是测试目标<code>gimp</code>没有找到<code>gegl</code>库。</p>
+<p>使用<code>export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH</code>命令，将<code>/usr/local/lib</code>目录添加到库搜索路径中。</p>
+<p>然后又出现了如下问题：显示测试用例超时，我试过了调大<code>-t</code>后面的值，以及更换了语料库，用自己生成的<code>.xcf</code>文件进行尝试，依旧出现超时问题，目前仍未解决。</p>
+<p><img src="/2023/07/15/Exercise-6/image-20230715212518052.png" alt="image-20230715212518052"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/13/How-and-How-Not-to-Write-a-Good-Systems-Paper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -622,7 +787,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2023/07/12/Exercise-5/" itemprop="url">Exercise-5（未完）</a></h1>
+                <a class="post-title-link" href="/2023/07/12/Exercise-5/" itemprop="url">Exercise-5（未测试出错误）</a></h1>
         
 
         <div class="post-meta">
@@ -1381,7 +1546,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
