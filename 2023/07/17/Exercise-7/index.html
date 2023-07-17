@@ -79,24 +79,21 @@
 
 
 
-<meta name="description" content="CVE-2016-4994 ：一个可通过特制的XCF文件触发的“释放后使用”漏洞。 本实验的实验指导省略了很多步骤，且对一些操作没有解释说明，上网也很难直接找到相关操作的解释原因。本实验的进展受到了一定的阻碍。 下载与安装目标创建新文件夹： 12cd $HOMEmkdir Fuzzing_gimp &amp;&amp; cd Fuzzing_gimp  下载需要依赖： 1sudo apt-get">
+<meta name="description" content="CVE-2019-14776：一个越界读取漏洞，可通过特制的 WMV&#x2F;ASF 文件触发。  下载与安装目标创建新文件夹： 12cd $HOMEmkdir fuzzing_vlc &amp;&amp; cd fuzzing_vlc  下载需要依赖： 这里指导中没有写明，根据运行.&#x2F;configure时的错误提示，下载所需依赖。 1sudo apt-get install liba">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Exercise-6（进行测试时受阻）">
-<meta property="og:url" content="http://example.com/2023/07/15/Exercise-6/index.html">
+<meta property="og:title" content="Exercise-7 （进行测试时受阻）">
+<meta property="og:url" content="http://example.com/2023/07/17/Exercise-7/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="CVE-2016-4994 ：一个可通过特制的XCF文件触发的“释放后使用”漏洞。 本实验的实验指导省略了很多步骤，且对一些操作没有解释说明，上网也很难直接找到相关操作的解释原因。本实验的进展受到了一定的阻碍。 下载与安装目标创建新文件夹： 12cd $HOMEmkdir Fuzzing_gimp &amp;&amp; cd Fuzzing_gimp  下载需要依赖： 1sudo apt-get">
+<meta property="og:description" content="CVE-2019-14776：一个越界读取漏洞，可通过特制的 WMV&#x2F;ASF 文件触发。  下载与安装目标创建新文件夹： 12cd $HOMEmkdir fuzzing_vlc &amp;&amp; cd fuzzing_vlc  下载需要依赖： 这里指导中没有写明，根据运行.&#x2F;configure时的错误提示，下载所需依赖。 1sudo apt-get install liba">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2023/07/15/Exercise-6/image-20230715152657972.png">
-<meta property="og:image" content="http://example.com/2023/07/15/Exercise-6/image-20230715152606117.png">
-<meta property="og:image" content="http://example.com/2023/07/15/Exercise-6/image-20230715195357036.png">
-<meta property="og:image" content="http://example.com/2023/07/15/Exercise-6/image-20230715195333854.png">
-<meta property="og:image" content="http://example.com/2023/07/15/Exercise-6/image-20230715212518052.png">
-<meta property="article:published_time" content="2023-07-15T06:49:17.000Z">
-<meta property="article:modified_time" content="2023-07-15T15:02:23.369Z">
+<meta property="og:image" content="http://example.com/Exercise-7/image-20230717165609006.png">
+<meta property="og:image" content="http://example.com/2023/07/17/Exercise-7/image-20230717221843888.png">
+<meta property="article:published_time" content="2023-07-17T08:53:06.000Z">
+<meta property="article:modified_time" content="2023-07-17T14:28:05.191Z">
 <meta property="article:author" content="赵禹">
 <meta property="article:tag" content="实验">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/07/15/Exercise-6/image-20230715152657972.png">
+<meta name="twitter:image" content="http://example.com/Exercise-7/image-20230717165609006.png">
 
 
 
@@ -126,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/07/15/Exercise-6/"/>
+  <link rel="canonical" href="http://example.com/2023/07/17/Exercise-7/"/>
 
 
 
 
 
-  <title>Exercise-6（进行测试时受阻） | 博客</title>
+  <title>Exercise-7 （进行测试时受阻） | 博客</title>
   
 
 
@@ -239,7 +236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/15/Exercise-6/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/17/Exercise-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -256,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Exercise-6（进行测试时受阻）</h1>
+          <h1 class="post-title" itemprop="name headline">Exercise-7 （进行测试时受阻）</h1>
         
 
         <div class="post-meta">
@@ -268,8 +265,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-15T14:49:17+08:00">
-                2023-07-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-17T16:53:06+08:00">
+                2023-07-17
               </time>
             
 
@@ -306,52 +303,50 @@
       
 
       
-        <p><a target="_blank" rel="noopener" href="https://www.cvedetails.com/cve/CVE-2016-4994/"><strong>CVE-2016-4994</strong></a> ：一个可通过特制的XCF文件触发的“释放后使用”漏洞。</p>
-<p>本实验的实验指导省略了很多步骤，且对一些操作没有解释说明，上网也很难直接找到相关操作的解释原因。本实验的进展受到了一定的阻碍。</p>
+        <p><a target="_blank" rel="noopener" href="https://nvd.nist.gov/vuln/detail/CVE-2019-14776"><strong>CVE-2019-14776</strong></a>：一个越界读取漏洞，可通过特制的 WMV&#x2F;ASF 文件触发。</p>
+<p><img src="/Exercise-7/image-20230717165609006.png" alt="image-20230717165609006"></p>
 <h1 id="下载与安装目标"><a href="#下载与安装目标" class="headerlink" title="下载与安装目标"></a>下载与安装目标</h1><p><strong>创建新文件夹</strong>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME</span><br><span class="line">mkdir Fuzzing_gimp &amp;&amp; cd Fuzzing_gimp</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HOME</span><br><span class="line">mkdir fuzzing_vlc &amp;&amp; cd fuzzing_vlc</span><br></pre></td></tr></table></figure>
 
 <p><strong>下载需要依赖：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential libatk1.0-dev libfontconfig1-dev libcairo2-dev libgudev-1.0-0 libdbus-1-dev libdbus-glib-1-dev libexif-dev libxfixes-dev libgtk2.0-dev python2.7-dev libpango1.0-dev libglib2.0-dev zlib1g-dev intltool libbabl-dev</span><br></pre></td></tr></table></figure>
+<p>这里指导中没有写明，根据运行.&#x2F;configure时的错误提示，下载所需依赖。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev pkg-config libxcb-composite0-dev libxcb-xv0-dev libxcb-randr0-dev libasound2-dev </span><br></pre></td></tr></table></figure>
 
-<p><strong>下载并解压<code>libgegl-0.2</code>：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.gimp.org/pub/gegl/0.2/gegl-0.2.0.tar.bz2</span><br><span class="line">tar xvf gegl-0.2.0.tar.bz2 &amp;&amp; cd gegl-0.2.0</span><br></pre></td></tr></table></figure>
+<p><strong>下载并解压<code>vlc-3.0.7.1</code>：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.videolan.org/pub/videolan/vlc/3.0.7.1/vlc-3.0.7.1.tar.xz</span><br><span class="line">tar -xvf vlc-3.0.7.1.tar.xz &amp;&amp; cd vlc-3.0.7.1/</span><br></pre></td></tr></table></figure>
 
-<p><strong>更改两处：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/CODEC_CAP_TRUNCATED/AV_CODEC_CAP_TRUNCATED/g&#x27; ./operations/external/ff-load.c</span><br><span class="line">sed -i &#x27;s/CODEC_FLAG_TRUNCATED/AV_CODEC_FLAG_TRUNCATED/g&#x27; ./operations/external/ff-load.c</span><br></pre></td></tr></table></figure>
+<p><strong>构建并安装<code>vlc-3.0.7.1</code>：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=&quot;$HOME/fuzzing_vlc/vlc-3.0.7.1/install&quot; --disable-a52 --disable-lua --disable-qt</span><br><span class="line">make -j$(nproc)</span><br></pre></td></tr></table></figure>
 
-<p>这里为什么要做此修改，指导中没有说明。</p>
-<p><strong>构建并安装<code>libgegl-0.2</code>：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure --enable-debug --disable-glibtest  --without-vala --without-cairo --without-pango --without-pangocairo --without-gdk-pixbuf --without-lensfun --without-libjpeg --without-libpng --without-librsvg --without-openexr --without-sdl --without-libopenraw --without-jasper --without-graphviz --without-lua --without-libavformat --without-libv4l --without-libspiro --without-exiv2 --without-umfpack</span><br><span class="line">make -j$(nproc)</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p><strong>测试：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/vlc-static --help</span><br></pre></td></tr></table></figure>
 
-<p><strong>下载并解压<code>GIMP-2.8.16</code>：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line">wget https://mirror.klaus-uwe.me/gimp/pub/gimp/v2.8/gimp-2.8.16.tar.bz2</span><br><span class="line">tar xvf gimp-2.8.16.tar.bz2 &amp;&amp; cd gimp-2.8.16/</span><br></pre></td></tr></table></figure>
+
 
 <p><strong>用<code>afl-clang-lto</code>作为编译器，编译构建<code>GIMP</code>：</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CC=afl-clang-lto CXX=afl-clang-lto++ PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/Fuzzing_gimp/gegl-0.2.0/ CFLAGS=&quot;-fsanitize=address&quot; CXXFLAGS=&quot;-fsanitize=address&quot; LDFLAGS=&quot;-fsanitize=address&quot; ./configure --disable-gtktest --disable-glibtest --disable-alsatest --disable-nls --without-libtiff --without-libjpeg --without-bzip2 --without-gs --without-libpng --without-libmng --without-libexif --without-aa --without-libxpm --without-webkit --without-librsvg --without-print --without-poppler --without-cairo-pdf --without-gvfs --without-libcurl --without-wmf --without-libjasper --without-alsa --without-gudev --disable-python --enable-gimp-console --without-mac-twain --without-script-fu --without-gudev --without-dbus --disable-mp --without-linux-input --without-xvfb-run --with-gif-compression=none --without-xmc --with-shm=none --enable-debug  --prefix=&quot;$HOME/Fuzzing_gimp/gimp-2.8.16/install&quot;</span><br><span class="line">make -j$(nproc)</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
 
 <p>命令中禁用了许多测试以及许多库，具体原因没有说明，可能是为了减短编译时间。</p>
-<h1 id="模糊测试"><a href="#模糊测试" class="headerlink" title="模糊测试"></a>模糊测试</h1><p><strong>持久模式：</strong></p>
-<p>在持久模式下，AFL在执行测试用例后不会立即终止进程，而是保持进程的活动状态，等待下一个输入测试用例。这样，AFL可以避免为每个测试用例启动新的进程，从而节省了一些开销，并提高了Fuzzer的效率。</p>
-<p>为了启用持久模式，对<code>GIMP</code>的<code>xcf.c</code>源码做如下修改:</p>
-<p><img src="/2023/07/15/Exercise-6/image-20230715152657972.png" alt="image-20230715152657972"></p>
-<p><img src="/2023/07/15/Exercise-6/image-20230715152606117.png" alt="image-20230715152606117"></p>
-<p><strong>语料库：</strong></p>
-<p>使用实验指导中给出的<code>SampleInput.xcf</code>作为语料库。</p>
-<p><strong>首先删除一些不需要的插件来节省启动时间：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm ./install/lib/gimp/2.0/plug-ins/*</span><br></pre></td></tr></table></figure>
+<h1 id="模糊测试"><a href="#模糊测试" class="headerlink" title="模糊测试"></a>模糊测试</h1><p><strong>语料库：</strong></p>
+<p>使用实验指导中给出的<code>short2.wmv</code>和<code>veryshort.wmv</code>作为语料库。</p>
+<p><strong>Fuzzing harness：</strong></p>
+<p>如果直接模糊<code>VLC</code>静态二进制文件，因为<code>VLC</code>启动非常耗时，<code>AFL</code>每秒只执行几次。所以需要为<code>VLC</code>创建一个自定义的<code>Fuzzing harness</code>。根据<a target="_blank" rel="noopener" href="https://github.com/antonio-morales/Fuzzing101/blob/main/Exercise%207/fuzzing_harness.patch">补丁文件</a>选择修改<code>/test/vlc-demux-run.c</code>文件，以包含<code>Fuzzing harness</code>。</p>
+<p>然后通过以下步骤进行编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd test</span><br><span class="line">make vlc-demux-run -j$(nproc) LDFLAGS=&quot;-fsanitize=address&quot;</span><br><span class="line">cd ..  </span><br></pre></td></tr></table></figure>
+
+<p><strong>部分插桩：</strong></p>
+<p>将<a target="_blank" rel="noopener" href="https://github.com/antonio-morales/Fuzzing101/blob/main/Exercise%207/Partial_instrumentation">部分插桩的文件</a>放到<code>vlc-3.0.7.1/</code>目录下，之后模糊测试时调用。</p>
+<p><strong>提高<code>ASF</code>模糊测试速度：</strong></p>
+<p>根据<a target="_blank" rel="noopener" href="https://github.com/antonio-morales/Fuzzing101/blob/main/Exercise%207/speedup.patch">提速补丁文件</a>，修改<code>modules/demux/asf/libasf.c</code>文件。具体原因，指导中没有说明。</p>
+<p><strong>用<code>afl-clang-lto</code>作为编译器，启用<code>ASAN</code>，部分插桩编译：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CC=&quot;afl-clang-fast&quot; CXX=&quot;afl-clang-fast++&quot; ./configure --prefix=&quot;$HOME/fuzzing_vlc/vlc-3.0.7.1/install&quot; --disable-a52 --disable-lua --disable-qt --with-sanitizer=address</span><br><span class="line">AFL_LLVM_ALLOWLIST=$HOME/fuzzing_vlc/vlc-3.0.7.1/Partial_instrumentation make -j$(nproc) LDFLAGS=&quot;-fsanitize=address&quot;</span><br></pre></td></tr></table></figure>
 
 <p><strong>模糊测试：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ASAN_OPTIONS=detect_leaks=0,abort_on_error=1,symbolize=0 afl-fuzz -i &#x27;./afl_in&#x27; -o &#x27;./afl_out&#x27; -D -t 100 -- ./install/bin/gimp-console-2.8 --verbose -d -f @@</span><br></pre></td></tr></table></figure>
+<p>首先将定义好的字典<code>asf_dictionary.dict</code>放到<code>vlc-3.0.7.1/</code>目录下，然后进行模糊测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afl-fuzz -t 100 -m none -i &#x27;./afl_in&#x27; -o &#x27;./afl_out&#x27; -x asf_dictionary.dict -D -M master -- ./test/vlc-demux-run @@  </span><br></pre></td></tr></table></figure>
 
-<p>首先是出现如下错误：</p>
-<img src="image-20230715195357036.png" alt="image-20230715195357036" style="zoom:80%;" />
-
-<p><img src="/2023/07/15/Exercise-6/image-20230715195333854.png" alt="image-20230715195333854"></p>
-<p>经分析是测试目标<code>gimp</code>没有找到<code>gegl</code>库。</p>
-<p>使用<code>export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH</code>命令，将<code>/usr/local/lib</code>目录添加到库搜索路径中。</p>
-<p>然后又出现了如下问题：显示测试用例超时，我试过了调大<code>-t</code>后面的值，以及更换了语料库，用自己生成的<code>.xcf</code>文件进行尝试，依旧出现超时问题，目前仍未解决。</p>
-<p><img src="/2023/07/15/Exercise-6/image-20230715212518052.png" alt="image-20230715212518052"></p>
+<p>然后又出现了如下问题：显示测试用例直接导致程序崩溃，我后来又尝试自己生成了其他文件，作为测试用例，均显示同样错误。分析可能是，修改后，导致源文件出错。但接下来该如何解决这个问题，目前还没有头绪。</p>
+<p><img src="/2023/07/17/Exercise-7/image-20230717221843888.png" alt="image-20230717221843888"></p>
 
       
     </div>
@@ -382,8 +377,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/07/13/How-and-How-Not-to-Write-a-Good-Systems-Paper/" rel="next" title="怎么写好一篇好的系统论文">
-                <i class="fa fa-chevron-left"></i> 怎么写好一篇好的系统论文
+              <a href="/2023/07/15/Tips-on-Writing-a-Research-Paper/" rel="next" title="撰写研究论文的技巧">
+                <i class="fa fa-chevron-left"></i> 撰写研究论文的技巧
               </a>
             
           </div>
@@ -391,10 +386,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/07/15/Tips-on-Writing-a-Research-Paper/" rel="prev" title="撰写研究论文的技巧">
-                撰写研究论文的技巧 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
