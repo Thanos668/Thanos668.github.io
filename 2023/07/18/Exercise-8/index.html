@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="目标是在Adobe Reader 9.5.1中发现一个越界漏洞。 AFL QEMU MODE该模式使用 QEMU（Quick Emulator）可以用于模糊测试无法在当前运行环境下直接执行的二进制文件，例如跨架构或针对特定操作系统的二进制文件。它通过将目标二进制文件加载到 QEMU 中，并使用 AFL 的字节级插桩技术来生成输入样本并收集覆盖率信息。 使用 QEMU 模式进行模糊测试时，通常需要设">
+<meta name="description" content="目标是在Adobe Reader 9.5.1中发现一个越界漏洞。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Exercise-8">
 <meta property="og:url" content="http://example.com/2023/07/18/Exercise-8/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="目标是在Adobe Reader 9.5.1中发现一个越界漏洞。 AFL QEMU MODE该模式使用 QEMU（Quick Emulator）可以用于模糊测试无法在当前运行环境下直接执行的二进制文件，例如跨架构或针对特定操作系统的二进制文件。它通过将目标二进制文件加载到 QEMU 中，并使用 AFL 的字节级插桩技术来生成输入样本并收集覆盖率信息。 使用 QEMU 模式进行模糊测试时，通常需要设">
+<meta property="og:description" content="目标是在Adobe Reader 9.5.1中发现一个越界漏洞。">
 <meta property="og:locale">
 <meta property="og:image" content="http://example.com/2023/07/18/Exercise-8/image-20230718202743503.png">
 <meta property="og:image" content="http://example.com/2023/07/18/Exercise-8/image-20230718203311333.png">
+<meta property="og:image" content="http://example.com/2023/07/18/Exercise-8/image-20230719230048796.png">
+<meta property="og:image" content="http://example.com/2023/07/18/Exercise-8/image-20230719223054247.png">
 <meta property="article:published_time" content="2023-07-18T12:26:50.000Z">
-<meta property="article:modified_time" content="2023-07-18T15:23:22.191Z">
+<meta property="article:modified_time" content="2023-07-19T15:16:56.985Z">
 <meta property="article:author" content="赵禹">
 <meta property="article:tag" content="实验">
 <meta name="twitter:card" content="summary">
@@ -304,6 +306,8 @@
 
       
         <p>目标是在Adobe Reader 9.5.1中发现一个越界漏洞。</p>
+<span id="more"></span>
+
 <h1 id="AFL-QEMU-MODE"><a href="#AFL-QEMU-MODE" class="headerlink" title="AFL QEMU MODE"></a>AFL QEMU MODE</h1><p>该模式使用 QEMU（Quick Emulator）可以用于模糊测试无法在当前运行环境下直接执行的二进制文件，例如跨架构或针对特定操作系统的二进制文件。它通过将目标二进制文件加载到 <code>QEMU</code> 中，并使用 <code>AFL</code> 的字节级插桩技术来生成输入样本并收集覆盖率信息。</p>
 <p>使用 <code>QEMU</code> 模式进行模糊测试时，通常需要设置一些参数和选项来指定目标二进制文件、QEMU 配置、输入样本等。</p>
 <h1 id="下载与安装"><a href="#下载与安装" class="headerlink" title="下载与安装"></a>下载与安装</h1><h3 id="AFL-’s-QEMU："><a href="#AFL-’s-QEMU：" class="headerlink" title="AFL++’s QEMU："></a>AFL++’s QEMU：</h3><p>**构建 <code>afl-qemu</code> **：</p>
@@ -345,7 +349,23 @@
 <p>成功运行 <code>AFL++</code> ：</p>
 <p><img src="/2023/07/18/Exercise-8/image-20230718203311333.png" alt="image-20230718203311333"></p>
 <p>但模糊测试的速度很慢，所以接下来改为采用持久模式。</p>
-<h4 id="持久模式方法："><a href="#持久模式方法：" class="headerlink" title="持久模式方法："></a>持久模式方法：</h4><p>未完。。。</p>
+<h4 id="持久模式方法："><a href="#持久模式方法：" class="headerlink" title="持久模式方法："></a>持久模式方法：</h4><p>与实验6中，通过插入 <code>AFL_LOOP</code> 的方法启用持久模式不同，在本实验中，由于无法访问源码，所以使用  <code>AFL_QEMU_PERSISTENT_ADDR</code>  来指定持久循环开始的方式，使用持久模式。建议将此地址设置为函数的开头。</p>
+<p><strong>下载 <code>valgrind</code> 和 <code>kcachegrind</code> ：</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install valgrind</span><br><span class="line">sudo apt-get install kcachegrind</span><br></pre></td></tr></table></figure>
+
+<p><strong>首先用 <code>valgrind</code> 进行动态分析：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ACRO_INSTALL_DIR=/opt/Adobe/Reader9/Reader ACRO_CONFIG=intellinux LD_LIBRARY_PATH=$LD_LIBRARY_PATH:&#x27;/opt/Adobe/Reader9/Reader/intellinux/lib&#x27; valgrind --tool=callgrind /opt/Adobe/Reader9/Reader/intellinux/bin/acroread -toPostScript [samplePDF]</span><br></pre></td></tr></table></figure>
+
+<p>其中， <code>[samplePDF]</code>  为语料库中 <code>pdf</code> 文件的路径。运行完后，得到 <code>callgrind.out</code> 文件，然后用 <code>kcachegrind</code> 打开进行分析，如下：</p>
+<p><img src="/2023/07/18/Exercise-8/image-20230719230048796.png" alt="image-20230719230048796"></p>
+<p>这里在选择哪个函数方面，经过多次尝试，最后选择开始地址为 <code>0x08546a00</code>的函数。 </p>
+<p><strong>模糊测试：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AFL_QEMU_PERSISTENT_ADDR=0x085478AC AFL_QEMU_PERSISTENT_GPR=1 ACRO_INSTALL_DIR=/opt/Adobe/Reader9/Reader ACRO_CONFIG=intellinux LD_LIBRARY_PATH=$LD_LIBRARY_PATH:&#x27;/opt/Adobe/Reader9/Reader/intellinux/lib&#x27; afl-fuzz -Q -i ./afl_in/ -o ./afl_out/ -t 2000 -- /opt/Adobe/Reader9/Reader/intellinux/bin/acroread -toPostScript @@</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/18/Exercise-8/image-20230719223054247.png" alt="image-20230719223054247"></p>
+<p>可以看到，速度比之前快了很多，而且 <code>stability</code> 也能保持在 90 % 以上。</p>
+<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>未完</p>
+<p>QASan没下载成功，明天再试一下。。</p>
 
       
     </div>
@@ -507,7 +527,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AFL-QEMU-MODE"><span class="nav-number">1.</span> <span class="nav-text">AFL QEMU MODE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">下载与安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AFL-%E2%80%99s-QEMU%EF%BC%9A"><span class="nav-number">2.0.1.</span> <span class="nav-text">AFL++’s QEMU：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDAdobe-Reader%EF%BC%9A"><span class="nav-number">2.0.2.</span> <span class="nav-text">下载Adobe Reader：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">模糊测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%96%99%E5%BA%93%EF%BC%9A"><span class="nav-number">3.0.1.</span> <span class="nav-text">语料库：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%EF%BC%9A"><span class="nav-number">3.0.2.</span> <span class="nav-text">模糊测试：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">第一种方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E6%A8%A1%E5%BC%8F%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">3.0.2.2.</span> <span class="nav-text">持久模式方法：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AFL-QEMU-MODE"><span class="nav-number">1.</span> <span class="nav-text">AFL QEMU MODE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">下载与安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AFL-%E2%80%99s-QEMU%EF%BC%9A"><span class="nav-number">2.0.1.</span> <span class="nav-text">AFL++’s QEMU：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDAdobe-Reader%EF%BC%9A"><span class="nav-number">2.0.2.</span> <span class="nav-text">下载Adobe Reader：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">模糊测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%96%99%E5%BA%93%EF%BC%9A"><span class="nav-number">3.0.1.</span> <span class="nav-text">语料库：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%EF%BC%9A"><span class="nav-number">3.0.2.</span> <span class="nav-text">模糊测试：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">第一种方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E6%A8%A1%E5%BC%8F%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">3.0.2.2.</span> <span class="nav-text">持久模式方法：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5"><span class="nav-number">3.1.</span> <span class="nav-text">检查</span></a></li></ol></li></ol></div>
             
 
           </div>
