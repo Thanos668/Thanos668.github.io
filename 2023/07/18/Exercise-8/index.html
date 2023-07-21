@@ -90,8 +90,9 @@
 <meta property="og:image" content="http://example.com/2023/07/18/Exercise-8/image-20230718203311333.png">
 <meta property="og:image" content="http://example.com/2023/07/18/Exercise-8/image-20230719230048796.png">
 <meta property="og:image" content="http://example.com/2023/07/18/Exercise-8/image-20230719223054247.png">
+<meta property="og:image" content="http://example.com/2023/07/18/Exercise-8/image-20230721234502798.png">
 <meta property="article:published_time" content="2023-07-18T12:26:50.000Z">
-<meta property="article:modified_time" content="2023-07-19T15:16:56.985Z">
+<meta property="article:modified_time" content="2023-07-21T15:47:27.016Z">
 <meta property="article:author" content="赵禹">
 <meta property="article:tag" content="实验">
 <meta name="twitter:card" content="summary">
@@ -364,8 +365,16 @@
 
 <p><img src="/2023/07/18/Exercise-8/image-20230719223054247.png" alt="image-20230719223054247"></p>
 <p>可以看到，速度比之前快了很多，而且 <code>stability</code> 也能保持在 90 % 以上。</p>
-<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>未完</p>
-<p>QASan没下载成功，明天再试一下。。</p>
+<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p><strong>构建 <code>QASan</code> 的库文件 <code>libqasan.so</code> ：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd qemu_mode/libqasan</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp libqasan.so /usr/local/lib</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过设置 <code>AFL_PATH</code> 环境变量来指定 <code>QASan</code> 的路径：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export AFL_PATH=/usr/local/lib/libqasan.so</span><br></pre></td></tr></table></figure>
+
+<p>但还是出现如下问题，不知为何这里为什么找不到路径。</p>
+<p><img src="/2023/07/18/Exercise-8/image-20230721234502798.png" alt="image-20230721234502798"></p>
 
       
     </div>
