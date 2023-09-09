@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="OverTheWire 社区提供了一系列帮助初学者学习和实践安全概念的 Wargame，通过练习 Wargame 获得基本工具的使用技巧和思路。 本文是对 Wargame 中的入门的 Bandit 的通关思路学习记录整理。 OverTheWire登录网址：OverTheWire: Wargames rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi aBZ0W5EmUfAf7kHTQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OverTheWire-Bandit">
+<meta property="og:url" content="http://example.com/2023/09/07/bandit/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="OverTheWire 社区提供了一系列帮助初学者学习和实践安全概念的 Wargame，通过练习 Wargame 获得基本工具的使用技巧和思路。 本文是对 Wargame 中的入门的 Bandit 的通关思路学习记录整理。 OverTheWire登录网址：OverTheWire: Wargames rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi aBZ0W5EmUfAf7kHTQ">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/bandit/image-20230908102804783.png">
+<meta property="og:image" content="http://example.com/bandit/image-20230908103111459.png">
+<meta property="og:image" content="http://example.com/bandit/image-20230908105519465.png">
+<meta property="og:image" content="http://example.com/bandit/image-20230908112659256.png">
+<meta property="og:image" content="http://example.com/bandit/image-20230908125138624.png">
+<meta property="og:image" content="http://example.com/bandit/image-20230908143744383.png">
+<meta property="og:image" content="http://example.com/bandit/image-20230908150335367.png">
+<meta property="og:image" content="http://example.com/bandit/image-20230908151719385.png">
+<meta property="og:image" content="http://example.com/bandit/image-20230908151940907.png">
+<meta property="og:image" content="http://example.com/bandit/image-20230908154530073.png">
+<meta property="og:image" content="http://example.com/bandit/image-20230908155950710.png">
+<meta property="article:published_time" content="2023-09-07T14:11:24.000Z">
+<meta property="article:modified_time" content="2023-09-09T02:44:33.647Z">
+<meta property="article:author" content="赵禹">
+<meta property="article:tag" content="OverTheWire">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/bandit/image-20230908102804783.png">
+
+
+<link rel="canonical" href="http://example.com/2023/09/07/bandit/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/09/07/bandit/","path":"2023/09/07/bandit/","title":"OverTheWire-Bandit"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>OverTheWire-Bandit | 博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-0"><span class="nav-number">1.</span> <span class="nav-text">Level 0</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal"><span class="nav-number">1.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-0-gt-Level-1"><span class="nav-number">2.</span> <span class="nav-text">Level 0 -&gt; Level 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-1"><span class="nav-number">2.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-1-gt-Level-2"><span class="nav-number">3.</span> <span class="nav-text">Level 1 -&gt; Level 2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-2"><span class="nav-number">3.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-2-gt-Level-3"><span class="nav-number">4.</span> <span class="nav-text">Level 2 -&gt; Level 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-3"><span class="nav-number">4.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-3-gt-Level-4"><span class="nav-number">5.</span> <span class="nav-text">Level 3 -&gt; Level 4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-4"><span class="nav-number">5.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-4-gt-Level-5"><span class="nav-number">6.</span> <span class="nav-text">Level 4 -&gt; Level 5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-5"><span class="nav-number">6.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-5-gt-Level-6"><span class="nav-number">7.</span> <span class="nav-text">Level 5 -&gt; Level 6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-6"><span class="nav-number">7.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-6-gt-Level-7"><span class="nav-number">8.</span> <span class="nav-text">Level 6 -&gt; Level 7</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-7"><span class="nav-number">8.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-7-gt-Level-8"><span class="nav-number">9.</span> <span class="nav-text">Level 7 -&gt; Level 8</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-8"><span class="nav-number">9.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-9-gt-Level-10"><span class="nav-number">10.</span> <span class="nav-text">Level 9 -&gt; Level 10</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-9"><span class="nav-number">10.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">赵禹</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/bandit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="赵禹">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="OverTheWire-Bandit | 博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OverTheWire-Bandit
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-07 22:11:24" itemprop="dateCreated datePublished" datetime="2023-09-07T22:11:24+08:00">2023-09-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-09 10:44:33" itemprop="dateModified" datetime="2023-09-09T10:44:33+08:00">2023-09-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>OverTheWire 社区提供了一系列帮助初学者学习和实践安全概念的 Wargame，通过练习 Wargame 获得基本工具的使用技巧和思路。</p>
+<p>本文是对 Wargame 中的入门的 Bandit 的通关思路学习记录整理。</p>
+<p>OverTheWire登录网址：<a target="_blank" rel="noopener" href="https://overthewire.org/wargames/">OverTheWire: Wargames</a></p>
+<p>rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi</p>
+<p>aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG</p>
+<h1 id="Level-0"><a href="#Level-0" class="headerlink" title="Level 0"></a>Level 0</h1><blockquote>
+<h2 id="Level-Goal"><a href="#Level-Goal" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>The goal of this level is for you to log into the game using SSH. The host to which you need to connect is <strong>bandit.labs.overthewire.org</strong>, on port 2220. The username is <strong>bandit0</strong> and the password is <strong>bandit0</strong>. Once logged in, go to the Level 1 page to find out how to beat Level 1.</p>
+</blockquote>
+<p>根据关卡要求，使用 ssh 登录 bandit.labs.overthewire.org 的 2220端口，账号和密码都是 bandit0 。</p>
+<p><img src="/bandit/image-20230908102804783.png" alt="image-20230908102804783"></p>
+<h1 id="Level-0-gt-Level-1"><a href="#Level-0-gt-Level-1" class="headerlink" title="Level 0 -&gt; Level 1"></a>Level 0 -&gt; Level 1</h1><blockquote>
+<h2 id="Level-Goal-1"><a href="#Level-Goal-1" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>The password for the next level is stored in a file called <strong>readme</strong> located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.</p>
+</blockquote>
+<p>使用 <code>ls</code> 查阅目录文件，发现 readme，用 <code>cat</code> 读取 readme 内容，获得登录下一关的密码。</p>
+<p><img src="/bandit/image-20230908103111459.png" alt="image-20230908103111459"></p>
+<p>后面的关卡的登录方式都是一样的，账号是 bandit[x]（x 为level的数字），密码为上一关得到的密码。</p>
+<h1 id="Level-1-gt-Level-2"><a href="#Level-1-gt-Level-2" class="headerlink" title="Level 1 -&gt; Level 2"></a>Level 1 -&gt; Level 2</h1><blockquote>
+<h2 id="Level-Goal-2"><a href="#Level-Goal-2" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>The password for the next level is stored in a file called <strong>-</strong> located in the home directory</p>
+</blockquote>
+<p>根据提示，密码存放在名为 ‘-‘ 的文件中，但由于 ‘-‘ 通常被用作命令行中的特殊符号，用于表示标准输入或标准输出，所以无法直接使用 <code>cat -</code> 的指令访问其内容。解决此问题的方法：</p>
+<ol>
+<li>使用相对路径：<code>cat ./-</code> 。</li>
+<li>使用输入重定向操作符：<code>cat &lt; -</code> 。</li>
+</ol>
+<p><img src="/bandit/image-20230908105519465.png" alt="image-20230908105519465"></p>
+<h1 id="Level-2-gt-Level-3"><a href="#Level-2-gt-Level-3" class="headerlink" title="Level 2 -&gt; Level 3"></a>Level 2 -&gt; Level 3</h1><blockquote>
+<h2 id="Level-Goal-3"><a href="#Level-Goal-3" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>The password for the next level is stored in a file called <strong>spaces in this filename</strong> located in the home directory</p>
+</blockquote>
+<p>这关的的文件名中存在空格，可以采用以下两种方法，读取文件内容：</p>
+<ol>
+<li>使用引号（单引号或双引号）包围文件名： <code>cat &#39;spaces in this filename&#39;</code> 。</li>
+<li>使用反斜杠 <code>\</code> 转义文件名中的空格： <code>cat spaces\ in\ this\ filename</code> 。</li>
+</ol>
+<p><img src="/bandit/image-20230908112659256.png" alt="image-20230908112659256"></p>
+<h1 id="Level-3-gt-Level-4"><a href="#Level-3-gt-Level-4" class="headerlink" title="Level 3 -&gt; Level 4"></a>Level 3 -&gt; Level 4</h1><blockquote>
+<h2 id="Level-Goal-4"><a href="#Level-Goal-4" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>The password for the next level is stored in a hidden file in the <strong>inhere</strong> directory.</p>
+</blockquote>
+<p>这关的文件是隐藏的，使用 <code>ls -a</code> 可列出目录中的所有文件，包括以点（.）开头的隐藏文件。</p>
+<p><img src="/bandit/image-20230908125138624.png" alt="image-20230908125138624"></p>
+<h1 id="Level-4-gt-Level-5"><a href="#Level-4-gt-Level-5" class="headerlink" title="Level 4 -&gt; Level 5"></a>Level 4 -&gt; Level 5</h1><blockquote>
+<h2 id="Level-Goal-5"><a href="#Level-Goal-5" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>The password for the next level is stored in the only human-readable file in the <strong>inhere</strong> directory. Tip: if your terminal is messed up, try the “reset” command.</p>
+</blockquote>
+<p>根据提示，密码存放在一个人类能看得懂的文件中，使用 <code>file</code> 查看文件类型，只有 ‘-file07’ 是ASCII编码，其他文件都是二进制数据文件。</p>
+<p><img src="/bandit/image-20230908143744383.png" alt="image-20230908143744383"></p>
+<h1 id="Level-5-gt-Level-6"><a href="#Level-5-gt-Level-6" class="headerlink" title="Level 5 -&gt; Level 6"></a>Level 5 -&gt; Level 6</h1><blockquote>
+<h2 id="Level-Goal-6"><a href="#Level-Goal-6" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>The password for the next level is stored in a file somewhere under the <strong>inhere</strong> directory and has all of the following properties:</p>
+<ul>
+<li>human-readable</li>
+<li>1033 bytes in size</li>
+<li>not executable</li>
+</ul>
+</blockquote>
+<p>进入目录后，发现有很多文件，根据提示，使用 <code>find</code> 命令查找大小为 1033 字节的文件：<code>find ./ -size 1033c</code> 。</p>
+<p><img src="/bandit/image-20230908150335367.png" alt="image-20230908150335367"></p>
+<h1 id="Level-6-gt-Level-7"><a href="#Level-6-gt-Level-7" class="headerlink" title="Level 6 -&gt; Level 7"></a>Level 6 -&gt; Level 7</h1><blockquote>
+<h2 id="Level-Goal-7"><a href="#Level-Goal-7" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>The password for the next level is stored <strong>somewhere on the server</strong> and has all of the following properties:</p>
+<ul>
+<li>owned by user bandit7</li>
+<li>owned by group bandit6</li>
+<li>33 bytes in size</li>
+</ul>
+</blockquote>
+<p>根据提示，查找文件 <code>find / -user bandit7 -group bandit6 -size 33c</code> 。</p>
+<p><img src="/bandit/image-20230908151719385.png" alt="image-20230908151719385"></p>
+<p>找到一个符合条件的可访问的文件，用 <code>cat</code> 查看，得到密码。</p>
+<p><img src="/bandit/image-20230908151940907.png" alt="image-20230908151940907"></p>
+<h1 id="Level-7-gt-Level-8"><a href="#Level-7-gt-Level-8" class="headerlink" title="Level 7 -&gt; Level 8"></a>Level 7 -&gt; Level 8</h1><blockquote>
+<h2 id="Level-Goal-8"><a href="#Level-Goal-8" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>The password for the next level is stored in the file <strong>data.txt</strong> next to the word <strong>millionth</strong></p>
+</blockquote>
+<p>直接查看 data.txt 内容，有很多，根据提示，应该从文件中，找到单词 millionth 那一行的密码。使用 <code>grep</code> 命令</p>
+<p><code> grep millionth data.txt</code> ，找到密码。</p>
+<p><img src="/bandit/image-20230908154530073.png" alt="image-20230908154530073"></p>
+<h1 id="Level-9-gt-Level-10"><a href="#Level-9-gt-Level-10" class="headerlink" title="Level 9 -&gt; Level 10"></a>Level 9 -&gt; Level 10</h1><blockquote>
+<h2 id="Level-Goal-9"><a href="#Level-Goal-9" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>The password for the next level is stored in the file <strong>data.txt</strong> and is the only line of text that occurs only once</p>
+</blockquote>
+<p>由提示知，密码在 data.txt 中且只出现一次。可以用 <code>uniq</code> 命令检查。<code>uniq</code> 命令用于从文本文件或标准输入流中去除重复的行，并可用于统计重复行的数量，但需要先对输入数据进行排序，以确保其能正常工作。</p>
+<p>所以需要先使用 <code>sort</code> 命令先对 data.txt 进行排序，再用 <code>uniq -u</code> 找到只出现一次的行。</p>
+<p>两个指令之间可以通过管道符 <code>|</code> 进行连接，用于将第一个命令的执行结果输出给第二个命令作为其输入。</p>
+<p><img src="/bandit/image-20230908155950710.png" alt="image-20230908155950710"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OverTheWire/" rel="tag"># OverTheWire</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/07/php%E5%AD%A6%E4%B9%A0/" rel="prev" title="php学习">
+                  <i class="fa fa-angle-left"></i> php学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">赵禹</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
