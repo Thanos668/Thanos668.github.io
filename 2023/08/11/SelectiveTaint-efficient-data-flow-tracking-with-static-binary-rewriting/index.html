@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="SelectiveTaint: efficient data flow tracking with static binary rewriting 使用静态二进制重写技术实现可执行文件的选择性的污点分析框架 污点分析污点分析是一种广泛使用的程序分析技术，在程序执行期间跟踪感兴趣的数据流传播，也被称为动态污点分析。主要思想是将敏感数据标记为“污点”，然后跟踪它们在程序的执行过程中如何传播。 污点分析">
+    <meta name="description" content="SelectiveTaint: efficient data flow tracking with static binary rewriting 使用静态二进制重写技术实现可执行文件的选择性的污点分析框架">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SelectiveTaint efficient data flow tracking with static binary rewriting">
 <meta property="og:url" content="http://example.com/2023/08/11/SelectiveTaint-efficient-data-flow-tracking-with-static-binary-rewriting/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="SelectiveTaint: efficient data flow tracking with static binary rewriting 使用静态二进制重写技术实现可执行文件的选择性的污点分析框架 污点分析污点分析是一种广泛使用的程序分析技术，在程序执行期间跟踪感兴趣的数据流传播，也被称为动态污点分析。主要思想是将敏感数据标记为“污点”，然后跟踪它们在程序的执行过程中如何传播。 污点分析">
+<meta property="og:description" content="SelectiveTaint: efficient data flow tracking with static binary rewriting 使用静态二进制重写技术实现可执行文件的选择性的污点分析框架">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/SelectiveTaint-efficient-data-flow-tracking-with-static-binary-rewriting/image-20230811171036749.png">
 <meta property="og:image" content="http://example.com/SelectiveTaint-efficient-data-flow-tracking-with-static-binary-rewriting/image-20230811170333220.png">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/SelectiveTaint-efficient-data-flow-tracking-with-static-binary-rewriting/image-20230811180723904.png">
 <meta property="og:image" content="http://example.com/SelectiveTaint-efficient-data-flow-tracking-with-static-binary-rewriting/image-20230811182749245.png">
 <meta property="article:published_time" content="2023-08-11T07:53:47.000Z">
-<meta property="article:modified_time" content="2023-09-09T02:47:08.150Z">
+<meta property="article:modified_time" content="2023-09-09T02:56:06.282Z">
 <meta property="article:author" content="赵禹">
 <meta property="article:tag" content="论文分享">
 <meta name="twitter:card" content="summary">
@@ -202,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 10:47:08" itemprop="dateModified" datetime="2023-09-09T10:47:08+08:00">2023-09-09</time>
+      <time title="修改时间：2023-09-09 10:56:06" itemprop="dateModified" datetime="2023-09-09T10:56:06+08:00">2023-09-09</time>
     </span>
 
   
@@ -216,6 +216,8 @@
     
     <div class="post-body" itemprop="articleBody"><p>SelectiveTaint: efficient data flow tracking with static binary rewriting</p>
 <p>使用静态二进制重写技术实现可执行文件的选择性的污点分析框架</p>
+<span id="more"></span>
+
 <h1 id="污点分析"><a href="#污点分析" class="headerlink" title="污点分析"></a>污点分析</h1><p>污点分析是一种广泛使用的程序分析技术，在程序执行期间跟踪感兴趣的数据流传播，也被称为动态污点分析。主要思想是将敏感数据标记为“污点”，然后跟踪它们在程序的执行过程中如何传播。</p>
 <p>污点分析通常由三个部分组成：污点源、污点传播和污点汇聚点。</p>
 <p><strong>污点源：</strong>敏感数据的起点。</p>
